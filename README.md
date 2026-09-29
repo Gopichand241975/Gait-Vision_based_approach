@@ -16,3 +16,7 @@ Features
 🔐 Secure user and booking management
 🖼️ Hotel and room images
 📊 Hotel management dashboard
+
+Project Purpose
+
+The main purpose of Grand Stay is to provide a complete digital platform for managing hotel operations and allowing customers to conveniently search, book, and manage their hotel stays online.

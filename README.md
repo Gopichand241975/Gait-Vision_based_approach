@@ -30,3 +30,13 @@ Payment: Online payment integration
 Deployment: Vercel / GitHub
 
 
+Main Modules:
+Customer Module
+Register and login
+Browse available rooms
+View room details
+Select check-in and check-out dates
+Make reservations
+Make payments
+View booking information
+

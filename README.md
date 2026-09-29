@@ -17,6 +17,16 @@ Features
 🖼️ Hotel and room images
 📊 Hotel management dashboard
 
-Project Purpose
+Project Purpose:
 
 The main purpose of Grand Stay is to provide a complete digital platform for managing hotel operations and allowing customers to conveniently search, book, and manage their hotel stays online.
+
+Technology:
+
+Frontend: HTML, CSS, JavaScript / React
+Backend: Node.js, Express.js
+Database: Database integration for users, rooms, and bookings
+Payment: Online payment integration
+Deployment: Vercel / GitHub
+
+

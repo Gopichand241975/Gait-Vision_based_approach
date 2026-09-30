@@ -50,14 +50,6 @@ Manage hotel information
 View payment and booking details
 
 
-Open the project:
-
-cd Hotel-Management-System
-
-Install dependencies:
-
-npm install
-
 
 
 

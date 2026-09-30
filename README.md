@@ -1,4 +1,4 @@
-# 🏨 Grand Stay – Hotel Management System
+ji# 🏨 Grand Stay – Hotel Management System
 
 Grand Stay is a modern and user-friendly **Hotel Management System** designed to simplify hotel operations and provide guests with a smooth booking experience.
 
@@ -100,4 +100,4 @@ GitHub: [Gopichand241975](https://github.com/Gopichand241975)
 
 ## 📄 License
 
-This project is created for educational and development purposes.
+This project is created for educational and development purposes

@@ -28,14 +28,6 @@ Make payments
 View booking information
 
 
-Admin Module:
-Manage rooms
-Manage customers
-Manage bookings
-Monitor room availability
-Manage hotel information
-View payment and booking details
-
 
 
 

@@ -62,5 +62,6 @@ Debit Card
 Net Banking
 Wallet
 Pay at Hotel (where supported)
+Payment processing should use a secure payment gateway such as Razorpay or Stripe for production deployment.
 
 

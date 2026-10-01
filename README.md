@@ -1,4 +1,3 @@
-## Hotel Booking website:
 🏨 Grand Stay – Hotel Booking Platform
 
 Grand Stay is a modern, professional hotel booking website designed to provide users with a smooth and secure hotel discovery, room reservation, and payment experience.
@@ -104,4 +103,40 @@ Booking cancellation
 Payment status
 Important booking updates
 
+🛠️ Admin Dashboard
+
+Administrators can manage:
+
+Hotels
+Rooms
+Bookings
+Users
+Payments
+Offers
+Reviews
+
+Dashboard statistics include:
+
+Total Hotels
+Total Users
+Total Bookings
+Revenue
+Pending Bookings
+Cancelled Bookings
+🎨 Design
+
+Grand Stay uses a modern light-themed professional UI.
+
+Design Features
+Clean white interface
+Premium hotel imagery
+Modern cards
+Professional typography
+Responsive layouts
+Subtle shadows
+Smooth animations
+Clear booking buttons
+Mobile-friendly navigation
+
+The design is created specifically for Grand Stay and is not intended to duplicate another company's website.
 

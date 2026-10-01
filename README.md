@@ -33,3 +33,23 @@ Pricing
 Cancellation policy
 Check-in/check-out information
 Guest reviews
+
+📋 Booking System
+
+Complete booking workflow:
+
+Search Hotel
+     ↓
+Select Hotel
+     ↓
+Select Room
+     ↓
+Enter Guest Details
+     ↓
+Review Booking
+     ↓
+Make Payment
+     ↓
+Booking Confirmation
+
+

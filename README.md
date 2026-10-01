@@ -52,4 +52,15 @@ Make Payment
      ↓
 Booking Confirmation
 
+💳 Payment System
+
+The project supports a professional payment flow with options such as:
+
+UPI
+Credit Card
+Debit Card
+Net Banking
+Wallet
+Pay at Hotel (where supported)
+
 

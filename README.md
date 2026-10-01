@@ -65,3 +65,22 @@ Pay at Hotel (where supported)
 Payment processing should use a secure payment gateway such as Razorpay or Stripe for production deployment.
 
 
+🎫 Booking Management
+Users can:
+
+View upcoming bookings
+View completed bookings
+View cancelled bookings
+View booking details
+Download invoices
+Cancel eligible bookings
+
+👤 Authentication
+User registration
+User login
+Password protection
+Forgot password
+User profile
+Account settings
+
+

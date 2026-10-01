@@ -7,9 +7,20 @@ The platform provides a complete booking workflow from searching for hotels to s
 
 Note: Grand Stay is an original project inspired by modern hotel-booking platforms. It does not use or copy proprietary branding, hotel data, logos, personal information, or assets from other booking websites.
 
-✨ Features
+✨ Features:
 🔍 Hotel Search
 Search hotels by destination
 Select check-in and check-out dates
 Select rooms and number of guests
 View available hotels
+
+📋Hotel Listings:
+Hotel images
+Hotel ratings
+Guest ratings
+Room information
+Price per night
+Available amenities
+Breakfast availability
+Free cancellation information
+Sorting and filtering

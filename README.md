@@ -83,4 +83,25 @@ Forgot password
 User profile
 Account settings
 
+🎁 Offers
+
+Grand Stay includes promotional offers such as:
+
+Weekend discounts
+Early booking discounts
+Breakfast offers
+Family stay offers
+Long-stay discounts
+Promotional coupon codes
+
+🔔 Notifications
+
+Users receive notifications for:
+
+Booking confirmation
+Payment confirmation
+Booking cancellation
+Payment status
+Important booking updates
+
 

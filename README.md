@@ -14,6 +14,7 @@ Breakfast availability
 Free cancellation information
 Sorting and filtering
 
+
 🛏️ Hotel & Room Details
 Hotel image gallery
 Hotel description

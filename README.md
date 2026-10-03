@@ -25,6 +25,7 @@ Cancellation policy
 Check-in/check-out information
 Guest reviews
 
+
 📋 Booking System
 
 Complete booking workflow:

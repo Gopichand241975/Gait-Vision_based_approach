@@ -3,6 +3,7 @@
 Grand Stay is a modern, professional hotel booking website designed to provide users with a smooth and secure hotel discovery, room reservation, and payment experience.
 The platform provides a complete booking workflow from searching for hotels to selecting rooms, entering guest details, making payments, and receiving booking confirmation.
 
+
 📋Hotel Listings:
 Hotel images
 Hotel ratings

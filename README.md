@@ -77,5 +77,54 @@ data_cfg:
 
 The config already points to the partition file `datasets/CASIA-B/CASIA-B.json`. Make sure it matches your folder naming.
 
+## 8. Train
+
+Single GPU:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 \
+    opengait/main.py --cfgs ./configs/baseline/baseline.yaml --phase train
+```
+
+Multi-GPU (example with 2 GPUs):
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 \
+    opengait/main.py --cfgs ./configs/baseline/baseline.yaml --phase train
+```
+
+`torch.distributed.launch` is deprecated but still works. The modern equivalent is:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node=2 \
+    opengait/main.py --cfgs ./configs/baseline/baseline.yaml --phase train
+```
+
+## 9. Monitor training
+
+In a second terminal:
+
+```bash
+tensorboard --logdir=./output
+```
+
+Then open http://localhost:6006
+
+## 10. Test and calculate accuracy
+
+Set `evaluator_cfg.restore_hint` in the YAML to the checkpoint iteration you want to evaluate (e.g. `60000`). Otherwise untrained weights may be evaluated.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 \
+    opengait/main.py --cfgs ./configs/baseline/baseline.yaml --phase test
+```
+
+Rank-1 accuracy is printed per probe condition (NM, BG, CL) in the log.
+
+## 11. Results location
+
+- Checkpoints: `./output/<dataset>/<model>/<save_name>/checkpoints/`
+- Logs and accuracy table: `./output/<dataset>/<model>/<save_name>/`
+
 
 

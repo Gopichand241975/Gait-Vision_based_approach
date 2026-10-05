@@ -127,4 +127,14 @@ Rank-1 accuracy is printed per probe condition (NM, BG, CL) in the log.
 - Logs and accuracy table: `./output/<dataset>/<model>/<save_name>/`
 
 
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| A file named `=1.6` appears in the folder | Quote the version: `"torch>=1.10"` |
+| `torch.cuda.is_available()` is `False` | Reinstall PyTorch with the CUDA build from pytorch.org |
+| Pretreatment fails | Check folder structure and the dataset README in the repo |
+| Multi-GPU hangs on Windows | Use Linux or WSL2 |
+
+
 

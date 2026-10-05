@@ -64,5 +64,18 @@ python datasets/pretreatment.py \
     --input_path CASIA-B \
     --output_path CASIA-B-pkl
 ```
+Note: arguments differ between OpenGait versions (some need `--dataset CASIAB`). Check `datasets/CASIA-B/README.md` in the repo for the exact command.
+
+## 7. Edit the config
+
+Open `configs/baseline/baseline.yaml` (or `configs/gaitset/gaitset.yaml`) and set:
+
+```yaml
+data_cfg:
+  dataset_root: /full/path/to/CASIA-B-pkl
+```
+
+The config already points to the partition file `datasets/CASIA-B/CASIA-B.json`. Make sure it matches your folder naming.
+
 
 

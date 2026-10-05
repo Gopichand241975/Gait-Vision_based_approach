@@ -8,3 +8,15 @@ Step-by-step guide to train and evaluate gait recognition models (Baseline / Gai
 - NVIDIA GPU with a recent driver and CUDA
 - Anaconda or Miniconda
 - CASIA-B silhouette dataset (access must be requested)
+
+
+## 1. Install Anaconda
+
+Download from https://www.anaconda.com/download
+
+## 2. Create the environment
+
+```bash
+conda create -n opengait python=3.8 -y
+conda activate opengait
+```

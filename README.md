@@ -20,3 +20,19 @@ Download from https://www.anaconda.com/download
 conda create -n opengait python=3.8 -y
 conda activate opengait
 ```
+
+## 3. Clone OpenGait
+
+```bash
+git clone https://github.com/ShiqiYu/OpenGait.git
+cd OpenGait
+```
+
+## 4. Install PyTorch, then the other dependencies
+
+Install PyTorch first, using the command from https://pytorch.org that matches your CUDA version. Quote any version specifier, otherwise the shell treats `>=` as a redirect.
+
+```bash
+pip install "torch>=1.10" torchvision
+pip install -r requirements.txt
+```

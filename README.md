@@ -46,3 +46,23 @@ python -c "import torch; print(torch.cuda.is_available())"
 
 This should print `True`.
 
+
+## 5. Get the CASIA-B dataset
+
+Request access: http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp
+
+Use the silhouette version (pre-segmented images), not the raw video frames. Arrange it as:
+
+```
+CASIA-B/<subject 001-124>/<condition e.g. bg-01>/<view e.g. 000>/*.png
+```
+
+## 6. Convert the dataset to OpenGait's .pkl format
+
+```bash
+python datasets/pretreatment.py \
+    --input_path CASIA-B \
+    --output_path CASIA-B-pkl
+```
+
+

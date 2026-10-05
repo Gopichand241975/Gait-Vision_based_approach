@@ -36,3 +36,13 @@ Install PyTorch first, using the command from https://pytorch.org that matches y
 pip install "torch>=1.10" torchvision
 pip install -r requirements.txt
 ```
+
+
+Verify that the GPU is visible:
+
+```bash
+python -c "import torch; print(torch.cuda.is_available())"
+```
+
+This should print `True`.
+

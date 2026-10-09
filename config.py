@@ -56,3 +56,13 @@ SEED = 42
 # ---------- Smoke test overrides (used by selftest.py) ----------
 SMOKE_ITERS = 5
 SMOKE_BATCH_SIZE = 2
+
+
+def get_device():
+    """cuda if available, otherwise cpu. Never hardcode .cuda() elsewhere."""
+    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+def ensure_dirs():
+    for d in (DATASET_DIR, SKELETON_RAW_DIR, PROCESSED_DIR, CHECKPOINT_DIR, RESULTS_DIR):
+        d.mkdir(parents=True, exist_ok=True)

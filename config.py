@@ -26,3 +26,19 @@ SKELETON_EDGES = [
     (5, 11), (6, 12), (11, 12),               # torso
     (11, 13), (13, 15), (12, 14), (14, 16),   # legs
 ]
+# ---------- Sequences ----------
+SEQ_LEN = 60        # frames per training sample (GaitGraph uses 60)
+SEQ_STRIDE = 30     # step between windows when cutting long videos
+MIN_VALID_FRAMES = 20   # discard videos with fewer detected frames
+
+# ---------- Gallery / probe split ----------
+# First GALLERY_PER_PERSON videos of each person (sorted by name) = gallery,
+# the remaining videos = probes.
+GALLERY_PER_PERSON = 1
+
+# Subject split (only used if you switch to CASIA-B style data)
+TRAIN_RATIO = 0.6   # fraction of people used for training, the rest for testing
+
+# ---------- Model ----------
+FEATURE_DIM = 128   # size of the gait feature vector
+DROPOUT = 0.1

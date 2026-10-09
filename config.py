@@ -42,3 +42,17 @@ TRAIN_RATIO = 0.6   # fraction of people used for training, the rest for testing
 # ---------- Model ----------
 FEATURE_DIM = 128   # size of the gait feature vector
 DROPOUT = 0.1
+
+# ---------- Training ----------
+BATCH_SIZE = 16     # lower this if you see "CUDA out of memory"
+LR = 1e-3
+WEIGHT_DECAY = 1e-4
+TOTAL_ITERS = 2000
+SAVE_EVERY = 200    # checkpoint interval (iterations)
+LOG_EVERY = 20
+NUM_WORKERS = 2
+SEED = 42
+
+# ---------- Smoke test overrides (used by selftest.py) ----------
+SMOKE_ITERS = 5
+SMOKE_BATCH_SIZE = 2

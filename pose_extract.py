@@ -10,3 +10,7 @@ import numpy as np
 from tqdm import tqdm
 
 import config
+
+def load_model():
+    from ultralytics import YOLO
+    return YOLO(config.POSE_MODEL)  # downloads weights on first run

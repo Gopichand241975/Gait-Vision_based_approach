@@ -28,3 +28,16 @@ def pick_person(result):
     else:
         conf = result.keypoints.conf[i].cpu().numpy().reshape(-1, 1)
     return np.concatenate([xy, conf], axis=1).astype(np.float32)
+
+def fill_missing(seq, valid):
+    """Linearly interpolate frames where no person was found. Filled frames get conf=0."""
+    t = len(seq)
+    idx_valid = np.where(valid)[0]
+    idx_all = np.arange(t)
+    flat = seq.reshape(t, -1)
+    out = np.empty_like(flat)
+    for c in range(flat.shape[1]):
+        out[:, c] = np.interp(idx_all, idx_valid, flat[idx_valid, c])
+    out = out.reshape(seq.shape)
+    out[~valid, :, 2] = 0.0
+    return out

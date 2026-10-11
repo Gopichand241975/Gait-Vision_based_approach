@@ -41,3 +41,35 @@ def fill_missing(seq, valid):
     out = out.reshape(seq.shape)
     out[~valid, :, 2] = 0.0
     return out
+
+def extract_video(model, video_path, max_frames=None):
+    """Return (T, 17, 3) array, or None if too few frames had a detected person."""
+    cap = cv2.VideoCapture(str(video_path))
+    if not cap.isOpened():
+        print(f"  [warn] cannot open {video_path}")
+        return None
+    frames, valid = [], []
+    while True:
+        ok, frame = cap.read()
+        if not ok:
+            break
+        if max_frames is not None and len(frames) >= max_frames:
+            break
+        res = model(frame, conf=config.POSE_CONF, verbose=False)[0]
+        kp = pick_person(res)
+        if kp is None:
+            frames.append(np.zeros((config.NUM_JOINTS, config.NUM_CHANNELS), np.float32))
+            valid.append(False)
+        else:
+            frames.append(kp)
+            valid.append(True)
+    cap.release()
+
+    if len(frames) == 0:
+        return None
+    seq = np.stack(frames)
+    valid = np.array(valid)
+    if valid.sum() < config.MIN_VALID_FRAMES:
+        print(f"  [warn] {video_path.name}: only {valid.sum()} valid frames, skipped")
+        return None
+    return fill_missing(seq, valid)

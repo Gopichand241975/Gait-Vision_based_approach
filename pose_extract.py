@@ -109,3 +109,6 @@ def main():
     print(f"Done. saved={done} skipped={skipped} output={config.SKELETON_RAW_DIR}")
 
 
+if __name__ == "__main__":
+    main()
+

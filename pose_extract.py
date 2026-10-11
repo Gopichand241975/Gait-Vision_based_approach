@@ -11,9 +11,11 @@ from tqdm import tqdm
 
 import config
 
+
 def load_model():
     from ultralytics import YOLO
     return YOLO(config.POSE_MODEL)  # downloads weights on first run
+
 
 def pick_person(result):
     """Return a (17, 3) array for the largest detected person, or None."""
@@ -29,6 +31,7 @@ def pick_person(result):
         conf = result.keypoints.conf[i].cpu().numpy().reshape(-1, 1)
     return np.concatenate([xy, conf], axis=1).astype(np.float32)
 
+
 def fill_missing(seq, valid):
     """Linearly interpolate frames where no person was found. Filled frames get conf=0."""
     t = len(seq)
@@ -41,6 +44,7 @@ def fill_missing(seq, valid):
     out = out.reshape(seq.shape)
     out[~valid, :, 2] = 0.0
     return out
+
 
 def extract_video(model, video_path, max_frames=None):
     """Return (T, 17, 3) array, or None if too few frames had a detected person."""
@@ -111,4 +115,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-#dataset/person1/walk1.mp4

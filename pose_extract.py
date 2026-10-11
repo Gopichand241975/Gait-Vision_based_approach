@@ -73,3 +73,39 @@ def extract_video(model, video_path, max_frames=None):
         print(f"  [warn] {video_path.name}: only {valid.sum()} valid frames, skipped")
         return None
     return fill_missing(seq, valid)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--max_frames", type=int, default=None,
+                        help="only read the first N frames of each video (fast testing)")
+    parser.add_argument("--max_videos", type=int, default=None,
+                        help="only process the first N videos (fast testing)")
+    parser.add_argument("--overwrite", action="store_true", help="redo existing outputs")
+    args = parser.parse_args()
+
+    config.ensure_dirs()
+    videos = sorted(p for p in config.DATASET_DIR.glob("*/*")
+                    if p.suffix.lower() in config.VIDEO_EXTS)
+    if not videos:
+        raise SystemExit(f"No videos found. Expected {config.DATASET_DIR}/<person_id>/*.mp4")
+    if args.max_videos:
+        videos = videos[:args.max_videos]
+
+    model = load_model()
+    done = skipped = 0
+    for vp in tqdm(videos, desc="pose extraction"):
+        out_path = config.SKELETON_RAW_DIR / vp.parent.name / (vp.stem + ".npy")
+        if out_path.exists() and not args.overwrite:
+            continue
+        arr = extract_video(model, vp, args.max_frames)
+        if arr is None:
+            skipped += 1
+            continue
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        np.save(out_path, arr)
+        done += 1
+        print(f"  {vp.parent.name}/{vp.name} -> {arr.shape}")
+    print(f"Done. saved={done} skipped={skipped} output={config.SKELETON_RAW_DIR}")
+
+

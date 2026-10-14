@@ -45,12 +45,3 @@ def fill_missing(seq, valid):
     out[~valid, :, 2] = 0.0
     return out
 
-
-def extract_video(model, video_path, max_frames=None):
-    """Return (T, 17, 3) array, or None if too few frames had a detected person."""
-    cap = cv2.VideoCapture(str(video_path))
-    if not cap.isOpened():
-        print(f"  [warn] cannot open {video_path}")
-        return None
-    frames, valid = [], []
-    

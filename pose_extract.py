@@ -68,12 +68,3 @@ def extract_video(model, video_path, max_frames=None):
             frames.append(kp)
             valid.append(True)
     cap.release()
-
-    if len(frames) == 0:
-        return None
-    seq = np.stack(frames)
-    valid = np.array(valid)
-    if valid.sum() < config.MIN_VALID_FRAMES:
-        print(f"  [warn] {video_path.name}: only {valid.sum()} valid frames, skipped")
-        return None
-    return fill_missing(seq, valid)

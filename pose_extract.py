@@ -103,13 +103,7 @@ def main():
         if out_path.exists() and not args.overwrite:
             continue
         arr = extract_video(model, vp, args.max_frames)
-        if arr is None:
-            skipped += 1
-            continue
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        np.save(out_path, arr)
-        done += 1
-        print(f"  {vp.parent.name}/{vp.name} -> {arr.shape}")
+       )
     print(f"Done. saved={done} skipped={skipped} output={config.SKELETON_RAW_DIR}")
 
 

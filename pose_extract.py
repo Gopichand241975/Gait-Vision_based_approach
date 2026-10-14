@@ -104,6 +104,3 @@ def main():
             continue
         arr = extract_video(model, vp, args.max_frames)
        )
-    print(f"Done. saved={done} skipped={skipped} output={config.SKELETON_RAW_DIR}")
-
-

@@ -96,11 +96,4 @@ def main():
     if args.max_videos:
         videos = videos[:args.max_videos]
 
-    model = load_model()
-    done = skipped = 0
-    for vp in tqdm(videos, desc="pose extraction"):
-        out_path = config.SKELETON_RAW_DIR / vp.parent.name / (vp.stem + ".npy")
-        if out_path.exists() and not args.overwrite:
-            continue
-        arr = extract_video(model, vp, args.max_frames)
-       )
+   

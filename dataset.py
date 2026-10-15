@@ -1,5 +1,6 @@
 """Loading processed skeletons, gallery/probe/train split, and window helpers."""
 import random
+import re
 
 import numpy as np
 import torch
@@ -10,12 +11,22 @@ import config
 
 
 def list_records():
-    return [{"person": p.parent.name, "video": p.stem}
+    return [{"person": p.parent.name, "video": p.stem, "direction": direction_of(p.stem)}
             for p in sorted(config.PROCESSED_DIR.glob("*/*.npy"))]
 
 
 def record_path(rec):
     return config.PROCESSED_DIR / rec["person"] / (rec["video"] + ".npy")
+
+
+def natural_key(text):
+    """Sort walk_2 before walk_10."""
+    return [int(t) if t.isdigit() else t for t in re.split(r"(\d+)", text)]
+
+
+def direction_of(video):
+    """front_03 -> 'front'. Names without '_' belong to direction 'all'."""
+    return video.split("_", 1)[0] if "_" in video else "all"
 
 
 def make_split(records, mode=None, seed=None):
@@ -26,13 +37,14 @@ def make_split(records, mode=None, seed=None):
     for r in records:
         by_person.setdefault(r["person"], []).append(r)
     for v in by_person.values():
-        v.sort(key=lambda r: r["video"])
+        v.sort(key=lambda r: natural_key(r["video"]))
     persons = sorted(by_person)
     warnings = []
 
-    def gallery_probe(vids):
+    def gallery_probe(vids, count=None):
+        count = config.GALLERY_PER_PERSON if count is None else count
         n = len(vids)
-        g = n if n == 1 else min(config.GALLERY_PER_PERSON, n - 1)
+        g = n if n == 1 else min(count, n - 1)
         return vids[:g], vids[g:]
 
     train, gallery, probe = [], [], []
@@ -44,6 +56,28 @@ def make_split(records, mode=None, seed=None):
                 warnings.append(f"{p} has only 1 video: it has no probe video")
             gallery += g
             probe += q
+        train = list(gallery)
+    elif mode in ("per_direction", "cross_direction"):
+        train_persons = persons
+        for p in persons:
+            by_dir = {}
+            for r in by_person[p]:
+                by_dir.setdefault(direction_of(r["video"]), []).append(r)
+            for direction in sorted(by_dir):
+                vids = by_dir[direction]
+                if mode == "per_direction":
+                    g, q = gallery_probe(vids, config.GALLERY_PER_DIRECTION)
+                    if not q:
+                        warnings.append(f"{p}/{direction} has only 1 video: no probe")
+                elif direction == config.TEST_DIRECTION:
+                    g, q = [], vids
+                else:
+                    g, q = vids, []
+                gallery += g
+                probe += q
+        if mode == "cross_direction" and not probe:
+            found = sorted({direction_of(r["video"]) for r in records})
+            raise ValueError(f"TEST_DIRECTION '{config.TEST_DIRECTION}' not found. Directions: {found}")
         train = list(gallery)
     elif mode == "subjects":
         shuffled = persons[:]

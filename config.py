@@ -58,14 +58,21 @@ SMOOTH_WINDOW = 5     # temporal smoothing of keypoints in preprocess.py (1 = of
 IN_CHANNELS = 7       # x, y, conf, velocity(2), bone(2)
 
 # ---------- Gallery / probe split ----------
-# "videos"   : every person is seen in training. The first GALLERY_PER_PERSON videos of each
-#              person (sorted by file name) are training + gallery, the rest are probes.
-#              Use this for your own small dataset (needs >= 2 videos per person).
-# "subjects" : TRAIN_RATIO of the people are used for training; the other people are the
-#              test set (gallery + probes). This is the CASIA-B style protocol.
-SPLIT_MODE = "videos"
-GALLERY_PER_PERSON = 2
-TRAIN_RATIO = 0.6
+# Video file names must be  <direction>_<number>.mp4  e.g. front_01.mp4, back_10.mp4, left_03.mp4
+# (text before the first "_" = walking direction; numbers are sorted naturally 1,2,...,10).
+#
+# "per_direction" (DEFAULT for your data): for every person AND every direction, the first
+#     GALLERY_PER_DIRECTION walks = training + gallery, the remaining walks = probes (test).
+#     Example: 10 walks per direction, GALLERY_PER_DIRECTION = 6 -> 6 train/gallery, 4 test.
+# "cross_direction": every walk of TEST_DIRECTION = probes; all other directions = training +
+#     gallery. Harder test: recognise a person walking in a direction never seen in training.
+# "videos": first GALLERY_PER_PERSON videos of each person (no direction logic).
+# "subjects": TRAIN_RATIO of the people train; the other people are the test set (CASIA-B style).
+SPLIT_MODE = "per_direction"
+GALLERY_PER_DIRECTION = 6   # only for "per_direction"
+TEST_DIRECTION = ""         # only for "cross_direction", e.g. "left"
+GALLERY_PER_PERSON = 2      # only for "videos" / "subjects"
+TRAIN_RATIO = 0.6           # only for "subjects"
 
 # ---------- Model ----------
 FEATURE_DIM = 128
@@ -76,7 +83,7 @@ COSINE_SCALE = 16.0
 BATCH_SIZE = 16      # lower this if you see "CUDA out of memory"
 LR = 1e-3
 WEIGHT_DECAY = 1e-4
-TOTAL_ITERS = 2000
+TOTAL_ITERS = 3000
 SAVE_EVERY = 200
 LOG_EVERY = 20
 NUM_WORKERS = 2

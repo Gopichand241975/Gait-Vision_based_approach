@@ -1,0 +1,34 @@
+gait_project/                      <- create this folder (laptop, then upload to Drive)
+├── requirements.txt               <- file 1
+├── config.py                      <- file 2
+├── pose_extract.py                <- file 3
+├── check_pose.py                  <- file 4
+├── preprocess.py                  <- file 5
+├── augment.py                     <- file 6
+├── dataset.py                     <- file 7
+├── model.py                       <- file 8
+├── train.py                       <- file 9
+├── test.py                        <- file 10
+├── run_all.py                     <- file 11
+├── selftest.py                    <- file 12
+├── README.md                      <- file 13
+│
+├── dataset/                       <- YOU CREATE: put your videos here
+│   ├── person1/
+│   │   ├── walk1.mp4
+│   │   ├── walk2.mp4
+│   │   └── walk3.mp4
+│   └── person2/
+│       ├── walk1.mp4
+│       ├── walk2.mp4
+│       └── walk3.mp4
+│
+│   ---- everything below is created automatically ----
+├── skeletons_raw/<person>/<video>.npy     <- 17-joint skeletons (pixels)
+├── processed/<person>/<video>.npy         <- normalised skeletons
+├── checkpoints/                           <- last.pt, iter_XXXXXX.pt
+└── results/
+    ├── skeleton/        skeleton_summary.csv, pose_check/*.jpg
+    ├── training/        train_log.csv, split.json
+    └── recognition/     features_gallery.npz, features_probe.npz, distance_matrix.csv,
+                         predictions.csv, confusion_matrix.csv/.png, accuracy.json, report.txt

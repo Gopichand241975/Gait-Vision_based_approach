@@ -5,7 +5,7 @@ Writes into results/recognition/:
     distance_matrix.csv                        Euclidean distance probe x gallery
     predictions.csv                            actual vs predicted identity for every probe
     confusion_matrix.csv / .png                actual person (rows) vs predicted person (columns)
-    accuracy.json, report.txt                  Rank-1 / Rank-5 / Rank-10 accuracy, per-person accuracy
+    accuracy.json, report.txt                  Rank-1 / Rank-5 / Rank-10, per-person and per-direction accuracy
 """
 import argparse
 import csv
@@ -19,7 +19,7 @@ import torch
 import torch.nn.functional as F
 
 import config
-from dataset import record_path, to_features, window_of, window_starts
+from dataset import direction_of, record_path, to_features, window_of, window_starts
 from model import GaitResGCN
 
 
@@ -125,6 +125,11 @@ def main():
     per_person = {p: round(float(np.mean([c for c, q in zip(correct, qp) if q == p])), 4)
                   for p in sorted(set(qp))}
 
+    per_direction = {}
+    for d in sorted({direction_of(r["video"]) for r in probe}):
+        flags = [c for c, r in zip(correct, probe) if direction_of(r["video"]) == d]
+        per_direction[d] = round(float(np.mean(flags)), 4)
+
     save_confusion(out, qp, pred, sorted(set(gp) | set(qp)))
 
     acc = {"split_mode": split["mode"], "checkpoint_iteration": ckpt["iter"],
@@ -132,6 +137,7 @@ def main():
     for k, v in ranks.items():
         acc[f"rank{k}_accuracy_pct"] = round(100 * v, 2)
     acc["per_person_rank1"] = per_person
+    acc["per_direction_rank1"] = per_direction
     (out / "accuracy.json").write_text(json.dumps(acc, indent=2))
     report = ["Gait recognition report (17-joint skeletons, Euclidean distance)",
               f"Split mode: {split['mode']}   checkpoint iteration: {ckpt['iter']}",
@@ -140,6 +146,8 @@ def main():
     report += [f"(Rank-1 = {sum(correct)}/{len(correct)} probe videos correct)", "",
                "Per person (Rank-1):"]
     report += [f"  {p}: {100 * v:.1f}%" for p, v in per_person.items()]
+    report += ["", "Per walking direction (Rank-1):"]
+    report += [f"  {d}: {100 * v:.1f}%" for d, v in per_direction.items()]
     (out / "report.txt").write_text("\n".join(report) + "\n")
     print("\n".join(report))
     print(f"\nFiles saved in {out}")

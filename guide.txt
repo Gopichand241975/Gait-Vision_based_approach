@@ -46,3 +46,5 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
 py -3.12 -m venv gait
 gait\Scripts\activate
 python --version
+
+# ---- install requirements ----

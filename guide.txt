@@ -60,3 +60,4 @@ $f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.
 python selftest.py
 
 What you should see:
+The last line is SELFTEST PASSED.

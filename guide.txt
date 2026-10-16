@@ -58,3 +58,5 @@ $f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.
 
 # ---- run the code test ----
 python selftest.py
+
+What you should see:

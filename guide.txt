@@ -40,3 +40,6 @@ cd $HOME\Downloads
 Expand-Archive VisionBased.zip -DestinationPath . -Force
 cd VisionBased
 dir
+
+# ---- environment (Python 3.12; install it from python.org first if this fails) ----
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force

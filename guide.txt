@@ -43,3 +43,5 @@ dir
 
 # ---- environment (Python 3.12; install it from python.org first if this fails) ----
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+py -3.12 -m venv gait
+gait\Scripts\activate

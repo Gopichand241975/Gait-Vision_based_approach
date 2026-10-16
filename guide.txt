@@ -50,3 +50,7 @@ python --version
 # ---- install requirements ----
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 pip install -r requirements.txt
+
+# ---- check libraries and files ----
+python -c "import torch, cv2, ultralytics, matplotlib; print('OK', torch.__version__)"
+$f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.py","augment.py","dataset.py","model.py","train.py","test.py","run_all.py","selftest.py"; $f | Where-Object { -not (Test-Path $_) }

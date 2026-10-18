@@ -31,6 +31,7 @@ def video_feature(model, seq, device):
     return F.normalize(feat, dim=0).cpu().numpy()
 
 
+
 def extract(model, records, device):
     return np.stack([video_feature(model, load_record(r), device) for r in records])
 

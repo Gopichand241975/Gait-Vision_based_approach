@@ -57,22 +57,26 @@ SEQ_STRIDE = 30       # step between windows at test time
 SMOOTH_WINDOW = 5     # temporal smoothing of keypoints in preprocess.py (1 = off)
 IN_CHANNELS = 7       # x, y, conf, velocity(2), bone(2)
 
+
 # ---------- Gallery / probe split ----------
-# Video file names must be  <direction>_<number>.mp4  e.g. front_01.mp4, back_10.mp4, left_03.mp4
-# (text before the first "_" = walking direction; numbers are sorted naturally 1,2,...,10).
+# Video names like  P01_STR_cam1.mp4  ->  person = folder name (P01), direction = 2nd part (STR),
+# camera = 3rd part (cam1). Names like front_01.mp4 also work (direction = text before the first "_").
 #
-# "per_direction" (DEFAULT for your data): for every person AND every direction, the first
-#     GALLERY_PER_DIRECTION walks = training + gallery, the remaining walks = probes (test).
-#     Example: 10 walks per direction, GALLERY_PER_DIRECTION = 6 -> 6 train/gallery, 4 test.
-# "cross_direction": every walk of TEST_DIRECTION = probes; all other directions = training +
-#     gallery. Harder test: recognise a person walking in a direction never seen in training.
-# "videos": first GALLERY_PER_PERSON videos of each person (no direction logic).
-# "subjects": TRAIN_RATIO of the people train; the other people are the test set (CASIA-B style).
-SPLIT_MODE = "per_direction"
+# "temporal" (DEFAULT): every video is cut in time. The first TRAIN_FRACTION of each video
+#     (the first walking passes) = training + gallery; the rest of the video = probes (test).
+#     Same person and directions, but walking passes never seen in training.
+# "cross_direction": every video whose direction == TEST_DIRECTION (e.g. "CR2") = probes;
+#     all other directions = training + gallery. Hardest test: a direction never seen in training.
+# "per_direction": per person and direction, the first GALLERY_PER_DIRECTION videos = training +
+#     gallery, the remaining videos = probes (needs several video files per direction).
+# "videos": first GALLERY_PER_PERSON videos of each person. "subjects": TRAIN_RATIO of the people train.
+SPLIT_MODE = "temporal"
+TRAIN_FRACTION = 0.6        # only for "temporal"
+TEST_DIRECTION = ""         # only for "cross_direction", e.g. "CR2"
 GALLERY_PER_DIRECTION = 6   # only for "per_direction"
-TEST_DIRECTION = ""         # only for "cross_direction", e.g. "left"
 GALLERY_PER_PERSON = 2      # only for "videos" / "subjects"
 TRAIN_RATIO = 0.6           # only for "subjects"
+
 
 # ---------- Model ----------
 FEATURE_DIM = 128

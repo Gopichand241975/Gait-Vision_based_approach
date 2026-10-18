@@ -19,7 +19,7 @@ import torch
 import torch.nn.functional as F
 
 import config
-from dataset import direction_of, record_path, to_features, window_of, window_starts
+from dataset import direction_of, load_record, to_features, window_of, window_starts
 from model import GaitResGCN
 
 
@@ -32,8 +32,7 @@ def video_feature(model, seq, device):
 
 
 def extract(model, records, device):
-    return np.stack([video_feature(model, np.load(record_path(r)).astype(np.float32), device)
-                     for r in records])
+    return np.stack([video_feature(model, load_record(r), device) for r in records])
 
 
 def rank_hits(dist, probe_persons, gallery_persons, k):

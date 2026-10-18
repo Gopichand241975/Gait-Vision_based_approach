@@ -25,9 +25,23 @@ def natural_key(text):
 
 
 def direction_of(video):
-    """front_03 -> 'front'. Names without '_' belong to direction 'all'."""
-    return video.split("_", 1)[0] if "_" in video else "all"
+    """P01_STR_cam1 -> 'STR';  front_03 -> 'front';  names without '_' -> 'all'."""
+    parts = video.split("_")
+    if len(parts) >= 3:
+        return parts[1]
+    if len(parts) == 2:
+        return parts[0]
+    return "all"
 
+
+def load_record(rec):
+    """Load a processed skeleton sequence. If rec has a "span" [a, b] (fractions of the video),
+    only that part of the video is returned (used by the "temporal" split)."""
+    seq = np.load(record_path(rec)).astype(np.float32)
+    span = rec.get("span")
+    if span:
+        seq = seq[int(round(span[0] * len(seq))):int(round(span[1] * len(seq)))]
+    return seq
 
 def make_split(records, mode=None, seed=None):
     """Returns dict with train / gallery / probe record lists, train_persons and warnings."""

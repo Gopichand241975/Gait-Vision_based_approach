@@ -23,7 +23,8 @@ def load_model():
 
 
 def list_videos():
-    return sorted(p for p in config.DATASET_DIR.glob("*/*")
+    """Every video anywhere under dataset/. Person = name of the folder holding the video."""
+    return sorted(p for p in config.DATASET_DIR.rglob("*")
                   if p.is_file() and p.suffix.lower() in config.VIDEO_EXTS)
 
 

@@ -1,83 +1,317 @@
-gait_project/                      <- create this folder (laptop, then upload to Drive)
-├── requirements.txt               <- file 1
-├── config.py                      <- file 2
-├── pose_extract.py                <- file 3
-├── check_pose.py                  <- file 4
-├── preprocess.py                  <- file 5
-├── augment.py                     <- file 6
-├── dataset.py                     <- file 7
-├── model.py                       <- file 8
-├── train.py                       <- file 9
-├── test.py                        <- file 10
-├── run_all.py                     <- file 11
-├── selftest.py                    <- file 12
-├── README.md                      <- file 13
-│
-dataset/
-├── cam1/
-│   ├── P01/
-│   │   ├── P01_STR_cam1.mp4
-│   │   ├── P01_PRP_cam1.mp4
-│   │   ├── P01_CR1_cam1.mp4
-│   │   └── P01_CR2_cam1.mp4
-│   ├── P02/
-│   │   ├── P02_STR_cam1.mp4
-│   │   ├── P02_PRP_cam1.mp4
-│   │   ├── P02_CR1_cam1.mp4
-│   │   └── P02_CR2_cam1.mp4
-│   ├── P03/
-│   ├── P04/
-│   ├── P05/
-│   ├── P06/
-│   └── P07/
-│
-├── cam2/
-│   ├── P01/
-│   │   ├── P01_STR_cam2.mp4
-│   │   ├── P01_PRP_cam2.mp4
-│   │   ├── P01_CR1_cam2.mp4
-│   │   └── P01_CR2_cam2.mp4
-│   ├── P02/
-│   ├── P03/
-│   ├── P04/
-│   ├── P05/
-│   ├── P06/
-|
-│   ---- everything below is created automatically ----
-├── skeletons_raw/<person>/<video>.npy     <- 17-joint skeletons (pixels)
-├── processed/<person>/<video>.npy         <- normalised skeletons
-├── checkpoints/                           <- last.pt, iter_XXXXXX.pt
-└── results/
-    ├── skeleton/        skeleton_summary.csv, pose_check/*.jpg
-    ├── training/        train_log.csv, split.json
-    └── recognition/     features_gallery.npz, features_probe.npz, distance_matrix.csv,
-                         predictions.csv, confusion_matrix.csv/.png, accuracy.json, report.tx
+=====================================================================================
+ VISION-BASED GAIT RECOGNITION : SETUP + TRAINING GUIDE
+ For a NEW Lenovo LOQ laptop (Windows), NOTHING installed, NO VS Code needed
+=====================================================================================
+Everything is done in PowerShell. Files are edited with Notepad.
+Type or paste ONE command at a time and wait for it to finish. Type only the command,
+NOT the prompt text that starts with "PS C:\...>".
 
+-------------------------------------------------------------------------------------
+ FOLDER LAYOUT (what you must have at the end of STEP 3 and STEP 4)
+-------------------------------------------------------------------------------------
+ C:\Gait\VisionBased\                   <- the project folder (NO spaces in the path)
+ |-- requirements.txt
+ |-- config.py
+ |-- pose_extract.py
+ |-- check_pose.py
+ |-- preprocess.py
+ |-- augment.py
+ |-- dataset.py
+ |-- model.py
+ |-- train.py
+ |-- test.py
+ |-- run_all.py
+ |-- selftest.py
+ |-- README.md  GUIDE.txt
+ |
+ |-- dataset\                           <- YOU put the videos here (56 videos)
+ |   |-- S01\
+ |   |   |-- LINE\videos\             S01_LINE_Cam-P.mp4             S01_LINE_Cam-S.mp4
+ |   |   |-- PERP\videos\             S01_PERP_Cam-P.mp4             S01_PERP_Cam-S.mp4
+ |   |   |-- CROSS-RX-LEFT\videos\    S01_CROSS-RX-LEFT_Cam-P.mp4    S01_CROSS-RX-LEFT_Cam-S.mp4
+ |   |   |-- CROSS-RX-RIGHT\videos\   S01_CROSS-RX-RIGHT_Cam-P.mp4   S01_CROSS-RX-RIGHT_Cam-S.mp4
+ |   |-- S02\   (same 4 paths x 2 cameras)
+ |   |-- S03\   (same 4 paths x 2 cameras)
+ |   |-- S04\   (same 4 paths x 2 cameras)
+ |   |-- S05\   (same 4 paths x 2 cameras)
+ |   |-- S06\   (same 4 paths x 2 cameras)
+ |   |-- S07\   (same 4 paths x 2 cameras)
+ |
+ |   ---- everything below is created automatically ----
+ |-- skeletons_raw\<person>\<video>.npy     17-joint skeletons (pixels), e.g. skeletons_raw\S01\S01_LINE_Cam-P.npy
+ |-- processed\<person>\<video>.npy         normalised skeletons
+ |-- checkpoints\                           last.pt, iter_XXXXXX.pt
+ |-- results\
+     |-- skeleton\       skeleton_summary.csv, pose_check\*.jpg
+     |-- training\       train_log.csv, split.json
+     |-- recognition\    features_gallery.npz, features_probe.npz, distance_matrix.csv,
+                         predictions.csv, confusion_matrix.csv/.png, accuracy.json, report.txt
 
-#if new person want to steup:
-# ---- unzip ----
-cd $HOME\Downloads
-Expand-Archive VisionBased.zip -DestinationPath . -Force
-cd VisionBased
-dir
+ Naming rules (the code reads the labels from the names, so they must be exact):
+   dataset\S01\LINE\videos\S01_LINE_Cam-P.mp4
+        person    = S01   (first part of the file name)
+        direction = LINE  (second part)      camera = Cam-P (third part)
+   Directions: LINE, PERP, CROSS-RX-LEFT, CROSS-RX-RIGHT.   Cameras: Cam-P, Cam-S.
+   The folder must be called "videos" inside every path folder.
+   Only the .mp4 files are used. Other files (for example *.beeps.csv) are ignored.
 
-# ---- environment (Python 3.12; install it from python.org first if this fails) ----
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
-py -3.12 -m venv gait
-gait\Scripts\activate
-python --version
+-------------------------------------------------------------------------------------
+ STEP 0. Before you start
+-------------------------------------------------------------------------------------
+ - Plug in the charger. Keep it plugged in for the whole run.
+ - Free disk space: the videos are about 62 GB, plus about 5 GB for the outputs.
+ - Internet is needed for the installs and for the pose-model download (about 50 MB).
+ - The LOQ should have an NVIDIA GPU (checked in STEP 2). Training on the GPU is much
+   faster than on the CPU.
 
-# ---- install requirements ----
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-pip install -r requirements.txt
+-------------------------------------------------------------------------------------
+ STEP 1. Install Python 3.12 (once)
+-------------------------------------------------------------------------------------
+ 1. Open https://www.python.org/downloads/windows/ and download a Python 3.12.x
+    "Windows installer (64-bit)". (3.10 / 3.11 also work. NOT 3.13 or newer.)
+ 2. Run it. On the first screen TICK "Add python.exe to PATH", then "Install Now".
+ 3. Close all PowerShell windows. Open a NEW one: press the Windows key, type
+        powershell
+    and press Enter.
+ 4. Check:
+        py -3.12 --version
+    It must print Python 3.12.x
+ (Alternative if the Microsoft Store / winget works:  winget install Python.Python.3.12 )
 
-# ---- check libraries and files ----
-python -c "import torch, cv2, ultralytics, matplotlib; print('OK', torch.__version__)"
-$f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.py","augment.py","dataset.py","model.py","train.py","test.py","run_all.py","selftest.py"; $f | Where-Object { -not (Test-Path $_) }
+-------------------------------------------------------------------------------------
+ STEP 2. Check the NVIDIA GPU driver (once)
+-------------------------------------------------------------------------------------
+        nvidia-smi
+ - It must print a table with your GPU name (for example GeForce RTX ...) and a
+   "CUDA Version: xx.x". WRITE DOWN that CUDA version.
+ - If it says the command is not found: install the driver from
+   https://www.nvidia.com/drivers (or the NVIDIA app / Lenovo Vantage), restart the
+   laptop, and run nvidia-smi again.
+ - If there is no NVIDIA GPU at all, the code still runs on the CPU, but pose extraction
+   and training will be many times slower.
 
+-------------------------------------------------------------------------------------
+ STEP 3. Create the project folder and put the code in it
+-------------------------------------------------------------------------------------
+ A) If you have the project as a zip (for example copied from Google Drive to Downloads):
+        New-Item -ItemType Directory -Force C:\Gait
+        Expand-Archive "$HOME\Downloads\VisionBased.zip" -DestinationPath C:\Gait -Force
+        cd C:\Gait\VisionBased
+        dir
+    (Change VisionBased.zip to the real name of your zip. If the zip has no VisionBased
+    folder inside, unzip into C:\Gait\VisionBased instead.)
+ B) If you have loose files: create C:\Gait\VisionBased and copy all code files into it.
 
-# ---- run the code test ----
-python selftest.py
+ Check you are in the right folder. dir must show config.py, train.py, test.py,
+ requirements.txt ...  This must print NOTHING (nothing missing):
+        $f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.py","augment.py","dataset.py","model.py","train.py","test.py","run_all.py","selftest.py"; $f | Where-Object { -not (Test-Path $_) }
 
-What you should see:
-The last line is SELFTEST PASSED.
+ IMPORTANT: config.py, pose_extract.py and check_pose.py must be the UPDATED versions.
+ Check:
+        Select-String -Path pose_extract.py -Pattern "def person_of"
+ It must print one line. If it prints nothing, you have the old pose_extract.py: replace
+ pose_extract.py, check_pose.py and config.py with the updated files first.
+
+-------------------------------------------------------------------------------------
+ STEP 4. Put the videos in the dataset folder
+-------------------------------------------------------------------------------------
+ Copy the videos so the layout is exactly the one at the top of this file:
+   C:\Gait\VisionBased\dataset\S01\LINE\videos\S01_LINE_Cam-P.mp4
+   ... up to  dataset\S07\CROSS-RX-RIGHT\videos\S07_CROSS-RX-RIGHT_Cam-S.mp4
+ (The folder is called "dataset" here. Windows ignores capital letters, so "Dataset" works too.)
+ Tip: a pen drive or external disk is the easiest way to move 60 GB. Google Drive
+ downloads of big folders are split into several zips and can lose files.
+
+ One video per camera per path. A recording that was saved in two parts
+ (S02 PERP, S02 CROSS-RX-LEFT and S06 LINE have Cam-S1.mp4 + Cam-S2.mp4) must be joined
+ into ONE file named ..._Cam-S.mp4 first (see "JOINING SPLIT VIDEOS" at the end), so
+ that you have exactly 56 videos. Remove the two part files after joining.
+
+ Check the count. It must print 56:
+        (Get-ChildItem dataset -Recurse -Filter *.mp4).Count
+ Every person must have 8 videos. This must show 7 rows, each with Count 8:
+        Get-ChildItem dataset -Recurse -Filter *.mp4 | Group-Object { $_.Directory.Parent.Parent.Name } | Select-Object Name, Count
+ No video may be in the wrong person's folder. This must print NOTHING:
+        Get-ChildItem dataset -Recurse -Filter *.mp4 | Where-Object { -not $_.Name.StartsWith($_.Directory.Parent.Parent.Name + "_") } | Select-Object FullName
+ No duplicate names. This must print NOTHING:
+        Get-ChildItem dataset -Recurse -Filter *.mp4 | Group-Object Name | Where-Object Count -gt 1
+
+ Do NOT compress the videos or change their frame rate.
+
+-------------------------------------------------------------------------------------
+ STEP 5. Choose the train/test split in config.py (Notepad)
+-------------------------------------------------------------------------------------
+        notepad config.py
+ Find these two lines (about line 72 and 74) and make them exactly:
+        SPLIT_MODE = "cross_direction"
+        TEST_DIRECTION = "CROSS-RX-RIGHT"
+ Save (Ctrl+S) and close Notepad.
+ Result: LINE, PERP, CROSS-RX-LEFT videos (42) = training + gallery.
+         CROSS-RX-RIGHT videos (14) = test.
+ Check:
+        Select-String -Path config.py -Pattern "^SPLIT_MODE|^TEST_DIRECTION"
+ TEST_DIRECTION must be spelled exactly like the direction in the file names:
+   S01_CROSS-RX-RIGHT_Cam-P.mp4  ->  "CROSS-RX-RIGHT"
+ A wrong value stops train.py with "TEST_DIRECTION ... not found".
+ (For a 60/40 split inside every video instead, use SPLIT_MODE = "temporal" and
+ TEST_DIRECTION = "".)
+
+-------------------------------------------------------------------------------------
+ STEP 6. Create and activate the Python environment (once)
+-------------------------------------------------------------------------------------
+        Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+        py -3.12 -m venv gait
+        gait\Scripts\activate
+        python --version
+ "(gait)" must appear at the start of the line, and the version must be 3.12.x.
+ Do the activation again (cd into the folder first) every time you open a new PowerShell:
+        cd C:\Gait\VisionBased
+        gait\Scripts\activate
+
+-------------------------------------------------------------------------------------
+ STEP 7. Install PyTorch WITH GPU support (once). Do this BEFORE step 8.
+-------------------------------------------------------------------------------------
+ 1. Open https://pytorch.org/get-started/locally/
+ 2. Choose: Stable, Windows, Pip, Python, and a CUDA version equal to or lower than the
+    "CUDA Version" you wrote down in STEP 2.
+ 3. Copy the command shown and run it. Example only (the CUDA number may differ):
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+ 4. Check. It must print True and the GPU name:
+        python -c "import torch; print(torch.__version__, torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+ If it prints False: the CPU build got installed (or the driver is missing). Fix:
+        pip uninstall -y torch torchvision
+ then run the command from the pytorch.org selector again.
+ Only if the laptop has NO NVIDIA GPU, use the CPU build instead:
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+-------------------------------------------------------------------------------------
+ STEP 8. Install the other libraries (once)
+-------------------------------------------------------------------------------------
+        pip install -r requirements.txt
+        python -c "import torch, cv2, ultralytics, matplotlib, numpy; print('OK', torch.__version__)"
+ It must print OK.
+
+-------------------------------------------------------------------------------------
+ STEP 9. Test that the code works on this laptop (must pass before anything else)
+-------------------------------------------------------------------------------------
+        python selftest.py --pose
+ - The first line must say   device: cuda
+ - The last line must say    SELFTEST PASSED
+ The first run downloads the pose model (about 50 MB). The test uses fake data in a
+ temporary folder and does not touch your videos or results.
+
+-------------------------------------------------------------------------------------
+ STEP 10. Stop the laptop from sleeping (before the long runs)
+-------------------------------------------------------------------------------------
+        powercfg /change standby-timeout-ac 0
+        powercfg /change monitor-timeout-ac 0
+        powercfg /change hibernate-timeout-ac 0
+ Keep the charger plugged in. On the LOQ press Fn+Q until it shows Performance mode.
+ Do not close the lid and do not close the PowerShell window.
+
+-------------------------------------------------------------------------------------
+ STEP 11. Extract the skeletons from the videos (SLOW: several hours)
+-------------------------------------------------------------------------------------
+        python pose_extract.py --all
+ - Do not press Ctrl+C. If it stops for any reason, run the SAME command again:
+   finished videos are skipped.
+ - Output: skeletons_raw\S01\S01_LINE_Cam-P.npy ... and results\skeleton\skeleton_summary.csv
+
+-------------------------------------------------------------------------------------
+ STEP 12. CHECK the skeletons (do not skip)
+-------------------------------------------------------------------------------------
+        python check_pose.py
+        Get-Content results\skeleton\skeleton_summary.csv
+        explorer results\skeleton\pose_check
+ - In the pictures the green skeleton must sit on the walking person.
+ - In the csv: mean_confidence should be above about 0.4 and frames_with_person_pct high.
+ - If the skeletons are wrong or missing, STOP and fix the videos. Do not train.
+
+-------------------------------------------------------------------------------------
+ STEP 13. Preprocess
+-------------------------------------------------------------------------------------
+        python preprocess.py
+
+-------------------------------------------------------------------------------------
+ STEP 14. Train
+-------------------------------------------------------------------------------------
+ a) Quick trial first (a few minutes). Loss must fall and train_accuracy must rise:
+        python train.py --iters 300 --batch_size 16
+ b) Delete the trial output, then the full training (3000 iterations):
+        Remove-Item checkpoints, results\training, results\recognition -Recurse -Force -ErrorAction SilentlyContinue
+        python train.py
+ - Checkpoints are saved every 200 iterations in checkpoints\
+ - It prints split=cross_direction train_videos=42 ... probe=14 people=7. Check these numbers.
+ - If it stops, continue with:   python train.py --resume --iters 3000
+ - "CUDA out of memory"  ->  python train.py --batch_size 8
+ - DataLoader / worker error on Windows ->  python train.py --num_workers 0
+
+-------------------------------------------------------------------------------------
+ STEP 15. Test: find the recognition accuracy
+-------------------------------------------------------------------------------------
+        python test.py
+        Get-Content results\recognition\report.txt
+ Rank-1 accuracy = correct predictions / 14 test videos (CROSS-RX-RIGHT) x 100.
+ Save this result under its own name:
+        Copy-Item results\recognition\report.txt report_v1.txt
+        Copy-Item results\recognition\confusion_matrix.png confusion_v1.png
+        Copy-Item results\recognition\predictions.csv predictions_v1.csv
+        Copy-Item checkpoints\last.pt model_v1.pt
+
+-------------------------------------------------------------------------------------
+ ONE-COMMAND ALTERNATIVE (steps 11 to 15 together)
+-------------------------------------------------------------------------------------
+        python run_all.py
+ Run the step-by-step version the first time so you can check the skeleton pictures.
+ Options:   --skip_pose  (skeletons already done)   --iters 300   --batch_size 8
+
+-------------------------------------------------------------------------------------
+ WHAT TO COPY BACK (to Drive or a pen drive)
+-------------------------------------------------------------------------------------
+        Compress-Archive -Path results, checkpoints\last.pt, report_v1.txt, confusion_v1.png, predictions_v1.csv -DestinationPath gait_results.zip -Force
+ Also keep the skeletons (small, no need to re-extract):
+        Compress-Archive -Path skeletons_raw -DestinationPath skeletons_raw.zip -Force
+
+-------------------------------------------------------------------------------------
+ JOINING SPLIT VIDEOS (only for S02 PERP, S02 CROSS-RX-LEFT, S06 LINE)
+-------------------------------------------------------------------------------------
+ Needs ffmpeg:   winget install Gyan.FFmpeg    (then open a NEW PowerShell)
+ Example for S02 PERP. Go to its videos folder:
+        cd C:\Gait\VisionBased\dataset\S02\PERP\videos
+        "file 'S02_PERP_Cam-S1.mp4'", "file 'S02_PERP_Cam-S2.mp4'" | Set-Content -Encoding ascii list.txt
+        ffmpeg -f concat -safe 0 -i list.txt -c copy S02_PERP_Cam-S.mp4
+ Play S02_PERP_Cam-S.mp4 and check the join is smooth, then delete the two part files and
+ list.txt. Do the same for S02 CROSS-RX-LEFT and S06 LINE (change the names).
+ If -c copy fails (different codecs), the parts must be re-encoded instead.
+ Go back to the project folder afterwards:   cd C:\Gait\VisionBased
+
+-------------------------------------------------------------------------------------
+ STARTING OVER / CLEANING
+-------------------------------------------------------------------------------------
+ Delete all generated files (keeps code and videos):
+        Remove-Item skeletons_raw, processed, checkpoints, results, __pycache__ -Recurse -Force -ErrorAction SilentlyContinue
+ If you add or change videos, delete checkpoints and results\training and train again.
+
+-------------------------------------------------------------------------------------
+ TROUBLESHOOTING
+-------------------------------------------------------------------------------------
+ "py is not recognized"                -> Python not installed or "Add to PATH" was not ticked.
+                                          Reinstall Python, tick it, open a NEW PowerShell.
+ "running scripts is disabled"         -> Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+ torch.cuda.is_available() is False    -> CPU PyTorch installed, or NVIDIA driver missing. Redo
+                                          STEP 2 and STEP 7.
+ "No module named ..."                 -> the environment is not active. cd C:\Gait\VisionBased,
+                                          gait\Scripts\activate, then pip install -r requirements.txt
+ "No videos found"                     -> videos are not under dataset\ (check STEP 4)
+ "TEST_DIRECTION ... not found"        -> TEST_DIRECTION in config.py does not match the file
+                                          names (STEP 5)
+ "Need at least 2 different people"    -> train.py needs videos from at least 2 person folders
+ pose model download fails             -> no internet / firewall; run again with internet
+ "CUDA out of memory"                  -> python train.py --batch_size 8
+ skeletons look wrong in pose_check    -> person too small/far, bad light, or several people in
+                                          view (the largest person is used). Fix or replace video
+ a video is skipped (.failed file)     -> fewer than 20 frames with a person. Check the video, then
+                                          python pose_extract.py --all --retry
+ Laptop gets very hot / slows down     -> raise it off the desk, keep the vents free, keep the
+                                          charger plugged in
+=====================================================================================

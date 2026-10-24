@@ -9,6 +9,7 @@ Run it first on any new machine (CPU or GPU). If it prints PASSED, the code work
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -18,9 +19,10 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
+CODE = HERE   # folder the steps run from; main() points it to a temporary copy of the code
 
 
-def synth_skeleton(t, person, rng):
+def synth_skeleton(t, person, rng, direction=1):
     """Fake walking skeleton in pixels. Each person has own stride speed/amplitudes/proportions."""
     w = 0.14 + 0.05 * person
     leg_amp, arm_amp, leg_len = 0.30 + 0.12 * person, 0.25 + 0.05 * person, 0.85 + 0.10 * person
@@ -42,15 +44,30 @@ def synth_skeleton(t, person, rng):
             p[kn] = k
             p[an] = (k[0] + .9 * leg_len * np.sin(.7 * a), k[1] + .9 * leg_len * np.cos(.7 * a))
         for j, (x, y) in p.items():
-            out[f, j, 0] = x0 + 2.0 * f + scale * x + rng.normal(0, 1.5)
+            out[f, j, 0] = x0 + direction * 2.0 * f + direction * scale * x + rng.normal(0, 1.5)
             out[f, j, 1] = 250 + scale * y + rng.normal(0, 1.5)
             out[f, j, 2] = np.clip(rng.normal(0.9, 0.05), 0.5, 1.0)
     return out
 
 
+def make_code_copy(tmp):
+    """Copy the code into the temp folder and force the split to 'temporal' in the copy, so the
+    selftest works whatever SPLIT_MODE / TEST_DIRECTION you set in your real config.py.
+    (The synthetic videos are called front_01, back_01 ... and have no CR2 / CROSS-RX-RIGHT.)"""
+    code = tmp / "code"
+    shutil.copytree(HERE, code, ignore=shutil.ignore_patterns(
+        "dataset", "skeletons_raw", "processed", "checkpoints", "results", "__pycache__",
+        "gait", "venv", ".venv", ".git", "*.pt", "*.zip"))
+    cfg = (code / "config.py").read_text()
+    cfg = re.sub(r"(?m)^SPLIT_MODE = .*$", 'SPLIT_MODE = "temporal"', cfg)
+    cfg = re.sub(r"(?m)^TEST_DIRECTION = .*$", 'TEST_DIRECTION = ""', cfg)
+    (code / "config.py").write_text(cfg)
+    return code
+
+
 def step(name, args, env):
     print(f"\n--- {name} ---", flush=True)
-    r = subprocess.run([sys.executable, *args], cwd=str(HERE), env=env)
+    r = subprocess.run([sys.executable, *args], cwd=str(CODE), env=env)
     if r.returncode != 0:
         raise SystemExit(f"FAILED at step: {name}")
 
@@ -77,6 +94,8 @@ def main():
     env = dict(os.environ, GAIT_ROOT=str(tmp))
     os.environ["GAIT_ROOT"] = str(tmp)
     sys.path.insert(0, str(HERE))
+    global CODE
+    CODE = make_code_copy(tmp)
     import config
     import torch
     print("device:", config.get_device(), "| torch", torch.__version__, "| temp folder:", tmp)
@@ -84,15 +103,17 @@ def main():
     try:
         rng = np.random.default_rng(0)
         for person in range(3):
-            for vid in range(4):
-                d = tmp / "skeletons_raw" / f"person{person + 1}"
-                d.mkdir(parents=True, exist_ok=True)
-                np.save(d / f"walk{vid + 1}.npy", synth_skeleton(int(rng.integers(100, 160)), person, rng))
-        print("created 3 people x 4 synthetic videos")
+            d = tmp / "skeletons_raw" / f"person{person + 1}"
+            d.mkdir(parents=True, exist_ok=True)
+            for name, sign in (("front", 1), ("back", -1)):
+                for vid in range(1, 11):
+                    np.save(d / f"{name}_{vid:02d}.npy",
+                            synth_skeleton(int(rng.integers(100, 160)), person, rng, sign))
+        print("created 3 people x 2 directions x 10 synthetic videos")
 
         step("preprocess", ["preprocess.py"], env)
         proc = sorted((tmp / "processed").glob("*/*.npy"))
-        assert len(proc) == 12 and np.load(proc[0]).shape[1:] == (17, 3)
+        assert len(proc) == 60 and np.load(proc[0]).shape[1:] == (17, 3)
         assert np.isfinite(np.load(proc[0])).all(), "NaN in processed skeleton"
 
         step("train (100 iters)", ["train.py", "--iters", "100", "--batch_size", "4",

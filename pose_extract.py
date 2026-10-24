@@ -1,6 +1,6 @@
 """Step 1: videos -> 17-joint skeletons.
 
-Reads   dataset/<person_id>/<video>.mp4
+Reads   every .mp4 anywhere under dataset/ (e.g. dataset/S01/LINE/videos/S01_LINE_Cam-P.mp4)
 Writes  skeletons_raw/<person_id>/<video>.npy   shape (T, 17, 3) = x, y (pixels), confidence
         results/skeleton/skeleton_summary.csv   one row per video
 
@@ -23,17 +23,26 @@ def load_model():
 
 
 def list_videos():
-    """Every video anywhere under dataset/. Person = name of the folder holding the video."""
+    """Every video anywhere under dataset/. Person id: see person_of()."""
     return sorted(p for p in config.DATASET_DIR.rglob("*")
                   if p.is_file() and p.suffix.lower() in config.VIDEO_EXTS)
 
 
+def person_of(video):
+    """Person id of a video.
+    dataset/S01/LINE/videos/S01_LINE_Cam-P.mp4  -> S01  (folder is called 'videos': use the file name)
+    dataset/cam1/P01/P01_STR_cam1.mp4           -> P01  (folder name)"""
+    if video.parent.name.lower() == "videos":
+        return video.stem.split("_")[0]
+    return video.parent.name
+
+
 def out_path(video):
-    return config.SKELETON_RAW_DIR / video.parent.name / (video.stem + ".npy")
+    return config.SKELETON_RAW_DIR / person_of(video) / (video.stem + ".npy")
 
 
 def failed_path(video):
-    return config.SKELETON_RAW_DIR / video.parent.name / (video.stem + ".failed")
+    return config.SKELETON_RAW_DIR / person_of(video) / (video.stem + ".failed")
 
 
 def pending_videos(retry=False):
@@ -106,12 +115,16 @@ def write_summary():
     path = config.RESULTS_SKELETON_DIR / "skeleton_summary.csv"
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["person", "video", "frames", "frames_with_person_pct", "mean_confidence"])
+        w.writerow(["person", "video", "frames", "first_person_frame", "last_person_frame",
+                    "frames_with_person_pct", "mean_confidence"])
         for p in sorted(config.SKELETON_RAW_DIR.glob("*/*.npy")):
             a = np.load(p)
-            w.writerow([p.parent.name, p.stem, a.shape[0],
-                        round(100 * float((a[..., 2].mean(1) > 0).mean()), 1),
-                        round(float(a[..., 2].mean()), 3)])
+            present = np.where(a[..., 2].mean(axis=1) > 0)[0]
+            first = int(present[0]) if len(present) else -1
+            last = int(present[-1]) if len(present) else -1
+            w.writerow([p.parent.name, p.stem, a.shape[0], first, last,
+                        round(100 * len(present) / len(a), 1),
+                        round(float(a[present][..., 2].mean()) if len(present) else 0.0, 3)])
     return path
 
 
@@ -132,7 +145,7 @@ def run(batch_size=None, max_frames=None, retry=False, model=None):
             failed_path(vp).write_text("too few detected frames or unreadable video\n")
             continue
         np.save(o, arr)
-        print(f"  {vp.parent.name}/{vp.name} -> {arr.shape}")
+        print(f"  {person_of(vp)}/{vp.name} -> {arr.shape}")
     write_summary()
     return len(pending_videos(retry))
 
@@ -146,7 +159,7 @@ def main():
     ap.add_argument("--retry", action="store_true", help="retry videos that failed before")
     a = ap.parse_args()
     if not list_videos():
-        raise SystemExit(f"No videos found. Put them in {config.DATASET_DIR}/<person_id>/<video>.mp4")
+        raise SystemExit(f"No videos found. Put them under {config.DATASET_DIR}")
     left = run(None if a.all else a.batch_size, a.max_frames, a.retry)
     print(f"Done. Skeleton summary: {config.RESULTS_SKELETON_DIR / 'skeleton_summary.csv'}")
     if left:

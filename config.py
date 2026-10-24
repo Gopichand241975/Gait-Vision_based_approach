@@ -1,7 +1,7 @@
 """Central configuration. Edit values here only; every other file imports from here.
 
 Folder layout (all relative to this project folder):
-    dataset/<person_id>/<video>.mp4   <- YOU put the videos here
+    dataset/S01/LINE/videos/S01_LINE_Cam-P.mp4   <- YOU put the videos here (see GUIDE)
     skeletons_raw/                    <- pose_extract.py output (T x 17 x 3, pixels)
     processed/                        <- preprocess.py output (normalised skeletons)
     checkpoints/                      <- train.py output (model weights)
@@ -71,7 +71,7 @@ IN_CHANNELS = 7       # x, y, conf, velocity(2), bone(2)
 # "videos": first GALLERY_PER_PERSON videos of each person. "subjects": TRAIN_RATIO of the people train.
 SPLIT_MODE = "cross_direction"
 TRAIN_FRACTION = 0.6        # only for "temporal"
-TEST_DIRECTION = "CR2"       # only for "cross_direction", e.g. "CR2"
+TEST_DIRECTION = "CROSS-RX-RIGHT"   # only for "cross_direction" (directions: LINE, PERP, CROSS-RX-LEFT, CROSS-RX-RIGHT)
 GALLERY_PER_DIRECTION = 6   # only for "per_direction"
 GALLERY_PER_PERSON = 2      # only for "videos" / "subjects"
 TRAIN_RATIO = 0.6           # only for "subjects"

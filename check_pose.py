@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 
 import config
-from pose_extract import list_videos, out_path
+from pose_extract import list_videos, out_path, person_of
 
 
 def draw(frame, kp):
@@ -37,15 +37,19 @@ def main():
         if not out_path(v).exists():
             continue
         sk = np.load(out_path(v))
+        present = np.where(sk[..., 2].mean(axis=1) > 0)[0]     # frames where a person was found
+        if len(present) == 0:
+            print(f"[warn] {v.name}: no person detected in any frame")
+            continue
+        picks = present[np.linspace(0, len(present) - 1, a.frames).astype(int)]
         cap = cv2.VideoCapture(str(v))
-        total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) or len(sk)
-        for k, frac in enumerate(np.linspace(0.1, 0.9, a.frames)):
-            idx = min(int(frac * total), len(sk) - 1)
-            cap.set(cv2.CAP_PROP_POS_FRAMES, idx)
+        for k, idx in enumerate(picks):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, int(idx))
             ok, frame = cap.read()
             if not ok:
                 continue
-            cv2.imwrite(str(out_dir / f"{v.parent.name}_{v.stem}_{k}.jpg"), draw(frame, sk[idx]))
+            cv2.imwrite(str(out_dir / f"{person_of(v)}_{v.stem}_{k}_frame{int(idx)}.jpg"),
+                        draw(frame, sk[int(idx)]))
             n_saved += 1
         cap.release()
         shown += 1

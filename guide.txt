@@ -22,6 +22,7 @@ NOT the prompt text that starts with "PS C:\...>".
  |-- test.py
  |-- run_all.py
  |-- selftest.py
+ |-- total_accuracy.py                      <- LAST step: total accuracy over all test runs
  |-- README.md  GUIDE.txt
  |
  |-- dataset\                           <- YOU put the videos here (56 videos)
@@ -46,6 +47,9 @@ NOT the prompt text that starts with "PS C:\...>".
      |-- training\       train_log.csv, split.json
      |-- recognition\    features_gallery.npz, features_probe.npz, distance_matrix.csv,
                          predictions.csv, confusion_matrix.csv/.png, accuracy.json, report.txt
+     |-- runs\           one folder per saved test run (LINE, PERP, CROSS-RX-LEFT, CROSS-RX-RIGHT)
+     |-- total\          total_report.txt, total_accuracy.json, total_predictions.csv,
+                         total_confusion_matrix.csv/.png     <- the TOTAL accuracy (STEP 16)
 
  Naming rules (the code reads the labels from the names, so they must be exact):
    dataset\S01\LINE\videos\S01_LINE_Cam-P.mp4
@@ -104,7 +108,7 @@ NOT the prompt text that starts with "PS C:\...>".
 
  Check you are in the right folder. dir must show config.py, train.py, test.py,
  requirements.txt ...  This must print NOTHING (nothing missing):
-        $f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.py","augment.py","dataset.py","model.py","train.py","test.py","run_all.py","selftest.py"; $f | Where-Object { -not (Test-Path $_) }
+        $f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.py","augment.py","dataset.py","model.py","train.py","test.py","run_all.py","selftest.py","total_accuracy.py"; $f | Where-Object { -not (Test-Path $_) }
 
  IMPORTANT: config.py, pose_extract.py, check_pose.py and selftest.py must be the UPDATED versions.
  Check. Each command must print one line:
@@ -263,9 +267,65 @@ NOT the prompt text that starts with "PS C:\...>".
         Copy-Item checkpoints\last.pt model_v1.pt
 
 -------------------------------------------------------------------------------------
+ STEP 16. TOTAL accuracy of the whole vision-based approach (the LAST file: total_accuracy.py)
+-------------------------------------------------------------------------------------
+ One test run (step 15) tests only 14 videos (one walking direction). To get the TOTAL
+ accuracy, repeat train + test with each walking direction held out once, so that every
+ one of the 56 videos is tested exactly once. total_accuracy.py then combines the runs:
+
+     total accuracy = correct test videos in all 4 runs / 56 x 100
+
+ The 4 runs (TEST_DIRECTION in config.py):   LINE, PERP, CROSS-RX-LEFT, CROSS-RX-RIGHT
+ Each run is a full training, so allow the time of 4 trainings.
+
+ A) You already did step 15 with CROSS-RX-RIGHT. Save that run first:
+        python total_accuracy.py --save
+    It prints  Saved run 'CROSS-RX-RIGHT': x/14 test videos correct.
+
+ B) Then, for EACH of the other 3 directions (LINE, PERP, CROSS-RX-LEFT), one at a time:
+      1. notepad config.py   -> change only the text in quotes in the line
+                                TEST_DIRECTION = "..."      (for example "PERP"). Save, close.
+      2. Remove-Item checkpoints, results\training, results\recognition -Recurse -Force -ErrorAction SilentlyContinue
+      3. python train.py
+      4. python test.py
+      5. python total_accuracy.py --save
+    (Do NOT delete results\runs. It holds the saved runs.)
+
+ C) When 4 runs are saved, compute the TOTAL accuracy:
+        python total_accuracy.py
+        Get-Content results\total\total_report.txt
+    Check that the top of the report says:   Runs included: 4   Test videos in total: 56
+    The line to report is:   TOTAL Rank-1 accuracy = x/56 = xx.xx%
+    It also shows the accuracy of each run, the 95% confidence interval, and the accuracy
+    per person, per camera and per walking direction.
+    If a WARNINGS section appears (a video counted twice), two saved runs hold the same
+    test videos. Delete the wrong folder in results\runs\ and save that run again.
+
+ D) Put config.py back to your main setting:   TEST_DIRECTION = "CROSS-RX-RIGHT"
+
+ Optional shortcut for B) (all 4 runs automatically, stops if a step fails; the 4th run
+ leaves config.py on CROSS-RX-RIGHT). Paste it as one block:
+        foreach ($d in "LINE","PERP","CROSS-RX-LEFT","CROSS-RX-RIGHT") {
+            (Get-Content config.py) -replace '^TEST_DIRECTION = "[^"]*"', "TEST_DIRECTION = `"$d`"" | Set-Content config.py -Encoding ascii
+            Remove-Item checkpoints, results\training, results\recognition -Recurse -Force -ErrorAction SilentlyContinue
+            python train.py; if ($LASTEXITCODE -ne 0) { break }
+            python test.py; if ($LASTEXITCODE -ne 0) { break }
+            python total_accuracy.py --save
+        }
+        python total_accuracy.py
+ Use it only after one single run (steps 14-15) has worked.
+
+ Notes:
+  - python total_accuracy.py --list     shows which runs are saved.
+  - Run names are the held-out directions. Do not save the "temporal" split into the same
+    results\runs folder: it tests the same videos again and the total would be wrong.
+  - If you repeat a run, python total_accuracy.py --save simply replaces that run's folder.
+
+-------------------------------------------------------------------------------------
  ONE-COMMAND ALTERNATIVE (steps 11 to 15 together)
 -------------------------------------------------------------------------------------
         python run_all.py
+ (It does one test run only. The total accuracy of STEP 16 is separate.)
  Run the step-by-step version the first time so you can check the skeleton pictures.
  Options:   --skip_pose  (skeletons already done)   --iters 300   --batch_size 8
 
@@ -273,6 +333,7 @@ NOT the prompt text that starts with "PS C:\...>".
  WHAT TO COPY BACK (to Drive or a pen drive)
 -------------------------------------------------------------------------------------
         Compress-Archive -Path results, checkpoints\last.pt, report_v1.txt, confusion_v1.png, predictions_v1.csv -DestinationPath gait_results.zip -Force
+ (results\ already contains results\runs and results\total, with the total accuracy.)
  Also keep the skeletons (small, no need to re-extract):
         Compress-Archive -Path skeletons_raw -DestinationPath skeletons_raw.zip -Force
 
@@ -292,7 +353,8 @@ NOT the prompt text that starts with "PS C:\...>".
 -------------------------------------------------------------------------------------
  STARTING OVER / CLEANING
 -------------------------------------------------------------------------------------
- Delete all generated files (keeps code and videos):
+ Delete all generated files (keeps code and videos). This also deletes results\runs and
+ results\total, so copy them first if you need them:
         Remove-Item skeletons_raw, processed, checkpoints, results, __pycache__ -Recurse -Force -ErrorAction SilentlyContinue
  If you add or change videos, delete checkpoints and results\training and train again.
 

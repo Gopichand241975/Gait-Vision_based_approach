@@ -1,0 +1,19 @@
+@"
+gait/
+dataset/
+dataset_small/
+dataset_test/
+skeletons_raw/
+processed/
+checkpoints/
+results/
+__pycache__/
+*.pt
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.npy
+*.npz
+*.zip
+"@ | Set-Content .gitignore

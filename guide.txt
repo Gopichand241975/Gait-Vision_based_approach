@@ -13,16 +13,36 @@ gait_project/                      <- create this folder (laptop, then upload to
 ├── selftest.py                    <- file 12
 ├── README.md                      <- file 13
 │
-├── dataset/                       <- YOU CREATE: put your videos here
-│   ├── person1/
-│   │   ├── walk1.mp4
-│   │   ├── walk2.mp4
-│   │   └── walk3.mp4
-│   └── person2/
-│       ├── walk1.mp4
-│       ├── walk2.mp4
-│       └── walk3.mp4
+dataset/
+├── cam1/
+│   ├── P01/
+│   │   ├── P01_STR_cam1.mp4
+│   │   ├── P01_PRP_cam1.mp4
+│   │   ├── P01_CR1_cam1.mp4
+│   │   └── P01_CR2_cam1.mp4
+│   ├── P02/
+│   │   ├── P02_STR_cam1.mp4
+│   │   ├── P02_PRP_cam1.mp4
+│   │   ├── P02_CR1_cam1.mp4
+│   │   └── P02_CR2_cam1.mp4
+│   ├── P03/
+│   ├── P04/
+│   ├── P05/
+│   ├── P06/
+│   └── P07/
 │
+├── cam2/
+│   ├── P01/
+│   │   ├── P01_STR_cam2.mp4
+│   │   ├── P01_PRP_cam2.mp4
+│   │   ├── P01_CR1_cam2.mp4
+│   │   └── P01_CR2_cam2.mp4
+│   ├── P02/
+│   ├── P03/
+│   ├── P04/
+│   ├── P05/
+│   ├── P06/
+|
 │   ---- everything below is created automatically ----
 ├── skeletons_raw/<person>/<video>.npy     <- 17-joint skeletons (pixels)
 ├── processed/<person>/<video>.npy         <- normalised skeletons

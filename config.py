@@ -57,7 +57,6 @@ SEQ_STRIDE = 30       # step between windows at test time
 SMOOTH_WINDOW = 5     # temporal smoothing of keypoints in preprocess.py (1 = off)
 IN_CHANNELS = 7       # x, y, conf, velocity(2), bone(2)
 
-
 # ---------- Gallery / probe split ----------
 # Video names like  P01_STR_cam1.mp4  ->  person = folder name (P01), direction = 2nd part (STR),
 # camera = 3rd part (cam1). Names like front_01.mp4 also work (direction = text before the first "_").
@@ -70,13 +69,12 @@ IN_CHANNELS = 7       # x, y, conf, velocity(2), bone(2)
 # "per_direction": per person and direction, the first GALLERY_PER_DIRECTION videos = training +
 #     gallery, the remaining videos = probes (needs several video files per direction).
 # "videos": first GALLERY_PER_PERSON videos of each person. "subjects": TRAIN_RATIO of the people train.
-SPLIT_MODE = "temporal"
+SPLIT_MODE = "cross_direction"
 TRAIN_FRACTION = 0.6        # only for "temporal"
-TEST_DIRECTION = ""         # only for "cross_direction", e.g. "CR2"
+TEST_DIRECTION = "CR2"       # only for "cross_direction", e.g. "CR2"
 GALLERY_PER_DIRECTION = 6   # only for "per_direction"
 GALLERY_PER_PERSON = 2      # only for "videos" / "subjects"
 TRAIN_RATIO = 0.6           # only for "subjects"
-
 
 # ---------- Model ----------
 FEATURE_DIM = 128

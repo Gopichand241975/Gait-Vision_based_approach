@@ -106,11 +106,13 @@ NOT the prompt text that starts with "PS C:\...>".
  requirements.txt ...  This must print NOTHING (nothing missing):
         $f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.py","augment.py","dataset.py","model.py","train.py","test.py","run_all.py","selftest.py"; $f | Where-Object { -not (Test-Path $_) }
 
- IMPORTANT: config.py, pose_extract.py and check_pose.py must be the UPDATED versions.
- Check:
+ IMPORTANT: config.py, pose_extract.py, check_pose.py and selftest.py must be the UPDATED versions.
+ Check. Each command must print one line:
         Select-String -Path pose_extract.py -Pattern "def person_of"
- It must print one line. If it prints nothing, you have the old pose_extract.py: replace
- pose_extract.py, check_pose.py and config.py with the updated files first.
+        Select-String -Path selftest.py -Pattern "def make_code_copy"
+ If one prints nothing, that file is the old one: replace pose_extract.py, check_pose.py,
+ config.py and selftest.py with the updated files first. (The old selftest.py stops with
+ "TEST_DIRECTION ... not found" once config.py is set to the cross_direction split.)
 
 -------------------------------------------------------------------------------------
  STEP 4. Put the videos in the dataset folder
@@ -197,6 +199,8 @@ NOT the prompt text that starts with "PS C:\...>".
         python selftest.py --pose
  - The first line must say   device: cuda
  - The last line must say    SELFTEST PASSED
+ (The test runs on a temporary copy that always uses the temporal split, so it works with
+ your cross_direction setting in config.py. Your config.py is not changed.)
  The first run downloads the pose model (about 50 MB). The test uses fake data in a
  temporary folder and does not touch your videos or results.
 

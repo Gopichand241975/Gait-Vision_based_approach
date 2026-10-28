@@ -1,13 +1,17 @@
 """Central configuration. Edit values here only; every other file imports from here.
 
 Folder layout (all relative to this project folder):
-    dataset/S01/LINE/videos/S01_LINE_Cam-P.mp4   <- YOU put the videos here (see GUIDE)
+    dataset/S03/PERP/Videos/Cam-S/S03_PERP_Cam-S_T01.mp4   <- YOU put the clips here
+    manifests/dataset_inventory.csv   <- verify_dataset.py   (every clip found, readable or not)
+    manifests/camera_selection.csv    <- select_camera.py    (selected camera per subject + direction)
+    manifests/dataset_split.csv       <- make_split.py       (train / val / test per clip)
+    manifests/camera_review/          <- select_camera.py    (pictures for manual camera review)
     skeletons_raw/                    <- pose_extract.py output (T x 17 x 3, pixels)
     processed/                        <- preprocess.py output (normalised skeletons)
-    checkpoints/                      <- train.py output (model weights)
+    checkpoints/                      <- train.py output (last.pt, best.pt, iter_XXXXXX.pt)
     results/skeleton/                 <- skeleton summary + pose check images
-    results/training/                 <- training log + split used
-    results/recognition/              <- gait recognition results (features, predictions, accuracy)
+    results/training/                 <- training log, validation log, curves, split used
+    results/recognition/              <- test results (predictions, metrics, confusion matrix)
 """
 import os
 from pathlib import Path
@@ -27,7 +31,39 @@ RESULTS_SKELETON_DIR = RESULTS_DIR / "skeleton"
 RESULTS_TRAIN_DIR = RESULTS_DIR / "training"
 RESULTS_RECOG_DIR = RESULTS_DIR / "recognition"
 
+# Manifests are decisions (selected camera, split). They live outside results/ so that
+# cleaning results/ never deletes them.
+MANIFEST_DIR = ROOT / "manifests"
+INVENTORY_CSV = MANIFEST_DIR / "dataset_inventory.csv"
+CAMERA_SELECTION_CSV = MANIFEST_DIR / "camera_selection.csv"
+DATASET_SPLIT_CSV = MANIFEST_DIR / "dataset_split.csv"
+CAMERA_REVIEW_DIR = MANIFEST_DIR / "camera_review"
+
 VIDEO_EXTS = (".mp4", ".avi", ".mov", ".mkv")
+
+# ---------- Dataset description (used to CHECK the data, never to assume it) ----------
+# Clip names:  S03_PERP_Cam-S_T01.mp4 = subject_direction_camera_trial
+EXPECTED_SUBJECTS = [f"S{i:02d}" for i in range(1, 8)]
+EXPECTED_DIRECTIONS = ["LINE", "PERP", "CROSS-RX-LEFT", "CROSS-RX-RIGHT"]
+EXPECTED_CAMERAS = ["Cam-P", "Cam-S"]
+EXPECTED_CLIPS_PER_CAMERA = 10
+
+# ---------- Split of the selected clips (per subject + direction group) ----------
+SPLIT_SEED = 42                  # fixed seed -> the same dataset_split.csv every time
+SPLIT_CLIPS = (6, 2, 2)          # train, validation, test clips per group of 10 clips
+
+# ---------- Automatic camera selection (select_camera.py) ----------
+# A side view shows the person walking ACROSS the image: shoulders overlap (small shoulder
+# width / torso length) and the hips travel far sideways. These numbers are starting values and
+# were NOT calibrated on your videos: always look at manifests/camera_review/ pictures.
+CAM_SAMPLE_CLIPS = 3             # clips per camera that are inspected (first, middle, last trial)
+CAM_FRAMES_PER_CLIP = 30         # frames sampled from each inspected clip
+CAM_MIN_KP_CONF = 0.3            # joint confidence needed to use a shoulder / hip
+CAM_MIN_VALID_FRAMES = 10        # fewer usable frames -> the camera is "unclear"
+CAM_SHOULDER_FRONTAL = 0.8       # shoulder width / torso length of a fully front or back view
+CAM_TRAVEL_FULL = 3.0            # hip travel (in torso lengths) that counts as a full side view
+CAM_MIN_SIDE_SCORE = 0.5         # the chosen camera must reach at least this side-view score
+CAM_MIN_MARGIN = 0.25            # and beat the other camera by at least this much
 
 # ---------- Pose estimation (17 COCO joints only) ----------
 # YOLOv8-pose is used instead of HRNet; both give the 17 COCO keypoints (x, y, confidence).
@@ -57,21 +93,18 @@ SEQ_STRIDE = 30       # step between windows at test time
 SMOOTH_WINDOW = 5     # temporal smoothing of keypoints in preprocess.py (1 = off)
 IN_CHANNELS = 7       # x, y, conf, velocity(2), bone(2)
 
-# ---------- Gallery / probe split ----------
-# Video names like  P01_STR_cam1.mp4  ->  person = folder name (P01), direction = 2nd part (STR),
-# camera = 3rd part (cam1). Names like front_01.mp4 also work (direction = text before the first "_").
-#
-# "temporal" (DEFAULT): every video is cut in time. The first TRAIN_FRACTION of each video
-#     (the first walking passes) = training + gallery; the rest of the video = probes (test).
-#     Same person and directions, but walking passes never seen in training.
-# "cross_direction": every video whose direction == TEST_DIRECTION (e.g. "CR2") = probes;
-#     all other directions = training + gallery. Hardest test: a direction never seen in training.
-# "per_direction": per person and direction, the first GALLERY_PER_DIRECTION videos = training +
-#     gallery, the remaining videos = probes (needs several video files per direction).
+# ---------- Train / validation / test split ----------
+# "manifest" (DEFAULT): reads manifests/dataset_split.csv made by make_split.py (6 / 2 / 2 clips per
+#     subject + direction). Training clips = training data AND the gallery; validation clips pick
+#     the best checkpoint during training; test clips are used once, by test.py.
+# The older modes below do not use manifests and have no validation set:
+# "temporal": the first TRAIN_FRACTION of every video = training + gallery, the rest = probes.
+# "cross_direction": every video whose direction == TEST_DIRECTION = probes, the others = training.
+# "per_direction": per person and direction, the first GALLERY_PER_DIRECTION videos = training.
 # "videos": first GALLERY_PER_PERSON videos of each person. "subjects": TRAIN_RATIO of the people train.
-SPLIT_MODE = "cross_direction"
+SPLIT_MODE = "manifest"
 TRAIN_FRACTION = 0.6        # only for "temporal"
-TEST_DIRECTION = "CROSS-RX-RIGHT"   # only for "cross_direction" (directions: LINE, PERP, CROSS-RX-LEFT, CROSS-RX-RIGHT)
+TEST_DIRECTION = ""         # only for "cross_direction", e.g. "CROSS-RX-RIGHT"
 GALLERY_PER_DIRECTION = 6   # only for "per_direction"
 GALLERY_PER_PERSON = 2      # only for "videos" / "subjects"
 TRAIN_RATIO = 0.6           # only for "subjects"
@@ -86,11 +119,12 @@ BATCH_SIZE = 16      # lower this if you see "CUDA out of memory"
 LR = 1e-3
 WEIGHT_DECAY = 1e-4
 TOTAL_ITERS = 3000
-SAVE_EVERY = 200
+SAVE_EVERY = 200      # also how often the validation clips are evaluated
 LOG_EVERY = 20
 NUM_WORKERS = 2
 DATASET_REPEAT = 50  # one "epoch" = number of training videos x this
 SEED = 42
+BEST_CKPT = "best.pt"   # checkpoint with the best validation accuracy (used by test.py)
 
 # ---------- Smoke test ----------
 SMOKE_ITERS = 5
@@ -103,6 +137,6 @@ def get_device():
 
 
 def ensure_dirs():
-    for d in (DATASET_DIR, SKELETON_RAW_DIR, PROCESSED_DIR, CHECKPOINT_DIR,
+    for d in (DATASET_DIR, MANIFEST_DIR, SKELETON_RAW_DIR, PROCESSED_DIR, CHECKPOINT_DIR,
               RESULTS_SKELETON_DIR, RESULTS_TRAIN_DIR, RESULTS_RECOG_DIR):
         d.mkdir(parents=True, exist_ok=True)

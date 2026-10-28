@@ -381,3 +381,220 @@ NOT the prompt text that starts with "PS C:\...>".
  Laptop gets very hot / slows down     -> raise it off the desk, keep the vents free, keep the
                                           charger plugged in
 =====================================================================================
+
+
+
+
+
+#commands to run for training:
+
+Paste one block at a time, wait for it to finish, and do the CHECK before the next block.
+
+## 1. Setup (once)
+
+```powershell
+cd C:\Gait\VisionBased
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+py -3.12 -m venv gait
+gait\Scripts\activate
+nvidia-smi
+```
+
+Install PyTorch with GPU support. Take the exact command from https://pytorch.org/get-started/locally/. This one is only an example, and the CUDA number may differ:
+
+```powershell
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+python -c "import torch; print(torch.cuda.is_available())"
+```
+
+CHECK: it must print `True`.
+
+```powershell
+pip install -r requirements.txt
+python selftest.py --pose
+```
+
+CHECK: the last line must say `SELFTEST PASSED`.
+
+```powershell
+(Get-ChildItem dataset -Recurse -Filter *.mp4).Count
+Select-String -Path config.py -Pattern "^SPLIT_MODE|^TEST_DIRECTION"
+```
+
+CHECK: the count must be `56`, and the config lines must show `cross_direction` and `CROSS-RX-RIGHT`.
+
+## 2. Skeletons (once, several hours)
+
+```powershell
+powercfg /change standby-timeout-ac 0
+powercfg /change monitor-timeout-ac 0
+python pose_extract.py --all
+```
+
+If it stops, run `python pose_extract.py --all` again and it continues.
+
+```powershell
+python check_pose.py
+explorer results\skeleton\pose_check
+```
+
+CHECK: the green skeleton must sit on the walking person. If not, stop and don't train.
+
+```powershell
+python preprocess.py
+```
+
+## 3. Run 1: CROSS-RX-RIGHT
+
+Quick trial first:
+
+```powershell
+python train.py --iters 300 --batch_size 16
+```
+
+CHECK: the loss must fall. Then:
+
+```powershell
+Remove-Item checkpoints, results\training, results\recognition -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+```powershell
+python train.py
+```
+
+Wait for `Training finished at iteration 3000`.
+
+```powershell
+python test.py
+Get-Content results\recognition\report.txt
+```
+
+```powershell
+python total_accuracy.py --save
+```
+
+CHECK: it must print `Saved run 'CROSS-RX-RIGHT': x/14 test videos correct`.
+
+## 4. Run 2: LINE
+
+```powershell
+(Get-Content config.py) -replace '^TEST_DIRECTION = "[^"]*"', 'TEST_DIRECTION = "LINE"' | Set-Content config.py -Encoding ascii
+Select-String -Path config.py -Pattern "^TEST_DIRECTION"
+Remove-Item checkpoints, results\training, results\recognition -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+CHECK: the `Select-String` line must show `LINE`. If it doesn't, edit the line with `notepad config.py`.
+
+```powershell
+python train.py
+```
+
+Wait for `Training finished at iteration 3000`.
+
+```powershell
+python test.py
+Get-Content results\recognition\report.txt
+```
+
+```powershell
+python total_accuracy.py --save
+```
+
+CHECK: it must print `Saved run 'LINE'`.
+
+## 5. Run 3: PERP
+
+```powershell
+(Get-Content config.py) -replace '^TEST_DIRECTION = "[^"]*"', 'TEST_DIRECTION = "PERP"' | Set-Content config.py -Encoding ascii
+Select-String -Path config.py -Pattern "^TEST_DIRECTION"
+Remove-Item checkpoints, results\training, results\recognition -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+```powershell
+python train.py
+```
+
+```powershell
+python test.py
+Get-Content results\recognition\report.txt
+```
+
+```powershell
+python total_accuracy.py --save
+```
+
+CHECK: it must print `Saved run 'PERP'`.
+
+## 6. Run 4: CROSS-RX-LEFT
+
+```powershell
+(Get-Content config.py) -replace '^TEST_DIRECTION = "[^"]*"', 'TEST_DIRECTION = "CROSS-RX-LEFT"' | Set-Content config.py -Encoding ascii
+Select-String -Path config.py -Pattern "^TEST_DIRECTION"
+Remove-Item checkpoints, results\training, results\recognition -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+```powershell
+python train.py
+```
+
+```powershell
+python test.py
+Get-Content results\recognition\report.txt
+```
+
+```powershell
+python total_accuracy.py --save
+```
+
+CHECK: it must print `Saved run 'CROSS-RX-LEFT'`.
+
+## 7. Total accuracy
+
+```powershell
+python total_accuracy.py --list
+python total_accuracy.py
+Get-Content results\total\total_report.txt
+```
+
+CHECK: `--list` must show 4 runs, and the report must say `Runs included: 4   Test videos in total: 56`. The line to report is **TOTAL Rank-1 accuracy**.
+
+Put `config.py` back to your main setting:
+
+```powershell
+(Get-Content config.py) -replace '^TEST_DIRECTION = "[^"]*"', 'TEST_DIRECTION = "CROSS-RX-RIGHT"' | Set-Content config.py -Encoding ascii
+```
+
+## 8. Copy the results back
+
+```powershell
+Compress-Archive -Path results, checkpoints\last.pt -DestinationPath gait_results.zip -Force
+Compress-Archive -Path skeletons_raw -DestinationPath skeletons_raw.zip -Force
+```
+
+## If something goes wrong
+
+Continue a stopped training:
+
+```powershell
+python train.py --resume --iters 3000
+```
+
+Fix "CUDA out of memory":
+
+```powershell
+python train.py --batch_size 8
+```
+
+Fix a Windows worker error:
+
+```powershell
+python train.py --num_workers 0
+```
+
+Retry videos that were skipped:
+
+```powershell
+python pose_extract.py --all --retry
+```
+
+I couldn't run these PowerShell commands here. The `-replace` lines are the ones to watch, which is why each has a `Select-String` check after it.

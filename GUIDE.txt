@@ -1,0 +1,263 @@
+=====================================================================================
+ VISION-BASED GAIT RECOGNITION : STEP-BY-STEP COMMAND GUIDE
+ 560 clips (7 subjects x 4 directions x 2 cameras x 10 clips) -> select camera ->
+ split 6 / 2 / 2 -> pose -> train + validate -> test
+ Windows PowerShell. No VS Code needed (use Notepad to edit files).
+=====================================================================================
+Type or paste ONE command at a time and wait for it to finish.
+Type only the command, NOT the prompt text that starts with "PS C:\...>".
+Lines marked CHECK tell you what the output must look like before you go on.
+
+-------------------------------------------------------------------------------------
+ FOLDER LAYOUT
+-------------------------------------------------------------------------------------
+ C:\Gait\VisionBased\                    <- project folder (no spaces in the path)
+ |-- config.py   verify_dataset.py   select_camera.py   make_split.py
+ |-- pose_extract.py   check_pose.py   preprocess.py   augment.py   dataset.py
+ |-- evaluate.py   model.py   train.py   test.py   predict.py
+ |-- run_all.py   selftest.py   total_accuracy.py (not used any more)
+ |-- requirements.txt   README.md   GUIDE.txt
+ |
+ |-- dataset\                           <- YOU put the clips here
+ |   |-- S01\
+ |   |   |-- LINE\Videos\Cam-P\   S01_LINE_Cam-P_T01.mp4 ... S01_LINE_Cam-P_T10.mp4
+ |   |   |-- LINE\Videos\Cam-S\   S01_LINE_Cam-S_T01.mp4 ... S01_LINE_Cam-S_T10.mp4
+ |   |   |-- PERP\Videos\Cam-P\ and Cam-S\
+ |   |   |-- CROSS-RX-LEFT\Videos\Cam-P\ and Cam-S\
+ |   |   |-- CROSS-RX-RIGHT\Videos\Cam-P\ and Cam-S\
+ |   |-- S02\ ... S07\                 (same structure)
+ |
+ |   ---- everything below is created by the commands ----
+ |-- manifests\                         dataset_inventory.csv, camera_selection.csv,
+ |                                      dataset_split.csv, camera_review\*.jpg
+ |-- skeletons_raw\<subject>\<clip>.npy 17-joint skeletons (pixels)
+ |-- processed\<subject>\<clip>.npy     normalised skeletons
+ |-- checkpoints\                       best.pt, last.pt, iter_XXXXXX.pt
+ |-- results\
+     |-- skeleton\       skeleton_summary.csv, pose_check\*.jpg
+     |-- training\       train_log.csv, val_log.csv, training_curves.png,
+     |                   best_checkpoint.json, split.json
+     |-- recognition\    report.txt, accuracy.json, classification_report.csv,
+                         confusion_matrix.csv / .png, predictions.csv, distance_matrix.csv,
+                         features_gallery.npz, features_probe.npz
+
+ Clip names are read by the code, so they must be exact:
+     S03_PERP_Cam-S_T01.mp4 = subject _ direction _ camera _ trial
+ Directions: LINE, PERP, CROSS-RX-LEFT, CROSS-RX-RIGHT.   Cameras: Cam-P, Cam-S.
+ Your original videos are only READ. They are never changed or deleted.
+
+-------------------------------------------------------------------------------------
+ PART A. ONE-TIME SETUP ON A NEW LAPTOP
+-------------------------------------------------------------------------------------
+ A1. Plug in the charger. You need about 5 GB free besides the videos, and internet
+     (installs + the pose model, about 50 MB, is downloaded on first use).
+
+ A2. Install Python 3.12 (once)
+     Download "Windows installer (64-bit)" 3.12.x from https://www.python.org/downloads/windows/
+     TICK "Add python.exe to PATH", then Install Now. Open a NEW PowerShell, then:
+        py -3.12 --version
+     CHECK: Python 3.12.x   (3.10 and 3.11 also work; NOT 3.13 or newer)
+
+ A3. Check the NVIDIA GPU (once)
+        nvidia-smi
+     CHECK: a table with your GPU name and "CUDA Version: xx.x" (write it down).
+     If "not found": install the driver from https://www.nvidia.com/drivers, restart, retry.
+     Without an NVIDIA GPU the code still runs on the CPU, but pose extraction and
+     training are many times slower.
+
+ A4. Put the code in the project folder
+        New-Item -ItemType Directory -Force C:\Gait
+        Expand-Archive "$HOME\Downloads\VisionBased.zip" -DestinationPath C:\Gait -Force
+        cd C:\Gait\VisionBased
+        dir
+     (Use the real name of your zip. The folder must contain config.py, train.py ...)
+     Replace the old files with the NEW versions of: config.py, dataset.py, pose_extract.py,
+     check_pose.py, train.py, test.py, run_all.py, selftest.py and add: verify_dataset.py,
+     select_camera.py, make_split.py, evaluate.py, predict.py.
+     CHECK: this must print NOTHING (no file missing):
+        $f="requirements.txt","config.py","pose_extract.py","check_pose.py","preprocess.py","augment.py","dataset.py","evaluate.py","model.py","train.py","test.py","predict.py","run_all.py","selftest.py","verify_dataset.py","select_camera.py","make_split.py"; $f | Where-Object { -not (Test-Path $_) }
+     CHECK: this must print one line containing "manifest":
+        Select-String -Path config.py -Pattern '^SPLIT_MODE'
+
+ A5. Create and activate the environment
+        Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+        py -3.12 -m venv gait
+        gait\Scripts\activate
+     CHECK: "(gait)" appears at the start of the line.
+     In EVERY new PowerShell window, run these two lines first:
+        cd C:\Gait\VisionBased
+        gait\Scripts\activate
+
+ A6. Install PyTorch WITH GPU support (before the next step)
+     Open https://pytorch.org/get-started/locally/ , choose Stable / Windows / Pip / Python /
+     a CUDA version at or below the one from nvidia-smi, copy the command and run it.
+     Example only (the CUDA number may differ):
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+     CHECK: this must print True and the GPU name:
+        python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+     (No NVIDIA GPU: use the CPU command from the same page. It prints False and runs slowly.)
+
+ A7. Install the other libraries
+        pip install -r requirements.txt
+        python -c "import torch, cv2, ultralytics, matplotlib, numpy; print('OK')"
+     CHECK: OK
+
+ A8. Test the code on this laptop (uses fake data, does not touch your clips)
+        python selftest.py --pose
+     CHECK: the first line says "device: cuda", the last line says SELFTEST PASSED.
+     If it fails, send the last 15 lines.
+
+ A9. Keep the laptop awake for the long runs
+        powercfg /change standby-timeout-ac 0
+        powercfg /change monitor-timeout-ac 0
+        powercfg /change hibernate-timeout-ac 0
+     Charger in. On the LOQ press Fn+Q for Performance mode. Do not close the lid.
+
+-------------------------------------------------------------------------------------
+ PART B. THE PIPELINE (run in this order)
+-------------------------------------------------------------------------------------
+ STEP 1. Copy the clips into dataset\ (layout above). A pen drive / external disk is the
+         safest way to move the files. Then:
+        (Get-ChildItem dataset -Recurse -Filter *.mp4).Count
+     CHECK: 560 expected. If it is different, the next step tells you exactly what differs.
+
+ STEP 2. Verify the dataset (names, counts, every clip opens)
+        python verify_dataset.py
+     It prints: clips found vs expected, names that do not follow
+     subject_direction_camera_trial, folders with a clip count other than 10, clips that
+     cannot be opened, frame rates, resolutions, clips shorter than 60 frames, and
+     identical (duplicate) files.
+     Writes manifests\dataset_inventory.csv and manifests\verification_report.txt.
+     It only REPORTS. Fix any problem it lists (missing / misnamed / unreadable clips)
+     before going on. Quick version without opening the clips:  python verify_dataset.py --quick
+
+ STEP 3. Choose the camera with the SIDE view (per subject + direction)
+        python select_camera.py
+     First run downloads the pose model (yolov8m-pose.pt) into the folder you run it from.
+     Every group (for example S03 PERP) gets one line:
+        auto_selected   the scores clearly favour one camera
+        needs_review    unclear -> NO camera is selected, you decide
+     Writes manifests\camera_selection.csv and one picture per group:
+        manifests\camera_review\S03_PERP.jpg    (Cam-P left, Cam-S right, with scores)
+     The scores use starting thresholds that were NOT calibrated on your videos:
+     LOOK AT THE PICTURES even for auto_selected groups (explorer manifests\camera_review).
+     For every group you want to decide (or correct) yourself:
+        python select_camera.py --set S03 PERP Cam-S --note "side view"
+     It records the status manual_confirmed. Manual decisions are never overwritten
+     unless you run  python select_camera.py --overwrite .
+     Show the table at any time:   python select_camera.py --list
+     Every run keeps the previous table as manifests\camera_selection.previous.csv.
+
+ STEP 4. Create the split (6 train / 2 validation / 2 test per subject + direction)
+        python make_split.py
+     Uses ONLY the selected camera of each group, all 10 clips, and the fixed seed 42
+     (config.py: SPLIT_SEED). The same inputs always give the same dataset_split.csv.
+     It prints the totals and the differences from the expected 280 = 168 / 56 / 56:
+        - a group still needs_review -> left out
+        - a group without 10 clips -> split 60/20/20 and marked nonstandard_count
+        - a group with fewer than 3 clips -> left out
+     CHECK: the last lines say "Verification passed". (Every clip is in exactly one split.)
+     To only re-check the existing file:   python make_split.py --verify
+
+ STEP 5. Extract the skeletons (SLOW: hours; only the selected clips, about 280)
+        python pose_extract.py --all
+     If it stops, run the SAME command again: finished clips are skipped.
+     Writes skeletons_raw\ and results\skeleton\skeleton_summary.csv.
+     (Clips that fail are listed as .failed files. Retry them:  python pose_extract.py --all --retry)
+
+ STEP 6. Check the skeletons (do not skip)
+        python check_pose.py
+        explorer results\skeleton\pose_check
+     CHECK: the green skeleton sits on the walking person. If not, STOP: the accuracy
+     would mean nothing. Also look at results\skeleton\skeleton_summary.csv
+     (frames_with_person_pct high, mean_confidence not low).
+
+ STEP 7. Normalise
+        python preprocess.py
+     CHECK: "Processed N skeleton sequences".
+
+ STEP 8. Quick training trial (a few minutes), then the real training
+        python train.py --smoke
+        Remove-Item checkpoints, results\training -Recurse -Force -ErrorAction SilentlyContinue
+        python train.py
+     During training you see the training loss and, every 200 iterations:
+        validation @ 200: accuracy 0.xxx  macro-F1 0.xxx
+        new best checkpoint (iteration 200) -> best.pt
+     The validation clips only select the best checkpoint. The test clips are NOT used.
+     Output: checkpoints\best.pt, results\training\train_log.csv, val_log.csv,
+     training_curves.png, best_checkpoint.json.
+     Stopped? Continue:               python train.py --resume --iters 3000
+     "CUDA out of memory":            python train.py --batch_size 8
+     Worker error on Windows:         python train.py --num_workers 0
+
+ STEP 9. Final test (run this ONCE, when all decisions are finished)
+        python test.py
+        Get-Content results\recognition\report.txt
+     Tests checkpoints\best.pt on the TEST clips. Gives accuracy, macro precision, recall
+     and F1, per-subject and per-direction results, and the confusion matrix
+     (results\recognition\confusion_matrix.png). Details: classification_report.csv,
+     predictions.csv. Test another checkpoint:  python test.py --ckpt checkpoints\last.pt
+
+ STEP 10. Use the saved model on a new clip (inference)
+        python predict.py path\to\clip.mp4
+     Prints the predicted subject and the closest subjects. It needs processed\ (from
+     STEP 7) because it compares with the training clips. Also accepts a raw skeleton
+     (.npy):  python predict.py skeletons_raw\S01\S01_LINE_Cam-P_T01.npy --top 3
+
+-------------------------------------------------------------------------------------
+ ALL STEPS IN ONE COMMAND (after the setup, A1-A9)
+-------------------------------------------------------------------------------------
+        python run_all.py
+ Runs verify_dataset -> select_camera -> make_split -> pose_extract -> check_pose ->
+ preprocess -> train -> test. It STOPS when some groups need a manual camera decision
+ (decide with --set, then run it again) and when any step fails. Steps whose manifest
+ already exists are not repeated (delete camera_selection.csv or dataset_split.csv to redo).
+ Run the step-by-step version the first time so you can check the pictures.
+ Options:  --skip_pose   --iters 300   --batch_size 8   --resume
+
+-------------------------------------------------------------------------------------
+ WHAT TO COPY BACK (Drive or pen drive)
+-------------------------------------------------------------------------------------
+        Compress-Archive -Path manifests, results, checkpoints\best.pt -DestinationPath gait_results.zip -Force
+        Compress-Archive -Path skeletons_raw -DestinationPath skeletons_raw.zip -Force
+
+-------------------------------------------------------------------------------------
+ START OVER / CLEAN
+-------------------------------------------------------------------------------------
+ Redo only the training (keeps skeletons, manifests):
+        Remove-Item checkpoints, results\training, results\recognition -Recurse -Force -ErrorAction SilentlyContinue
+ Redo the split (keeps the previous one as dataset_split.previous.csv):
+        python make_split.py
+ After a new split also redo STEP 5 for clips that are new, then STEP 7 and STEP 8.
+ Never train and test with an old checkpoint after the split changed.
+
+-------------------------------------------------------------------------------------
+ TROUBLESHOOTING
+-------------------------------------------------------------------------------------
+ "py is not recognized"               Python missing / PATH not ticked. Reinstall, new PowerShell.
+ "running scripts is disabled"        Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+ "No module named ..."                environment not active: cd C:\Gait\VisionBased ; gait\Scripts\activate
+ torch.cuda.is_available() False      CPU PyTorch installed or driver missing: redo A3 and A6
+ "dataset_split.csv does not exist"   run STEPS 2, 3, 4 first (or python pose_extract.py --all --all_videos
+                                      to process every video without the manifest)
+ "camera_selection.csv does not exist" run python select_camera.py
+ groups left out by make_split        they are still needs_review: python select_camera.py --set ...
+ "VERIFICATION FAILED ... identical files in different splits"
+                                      two clips are exact copies: check them, they leak between splits
+ "No videos found"                    clips are not under dataset\ (check STEP 1)
+ pose model download fails            no internet / firewall: retry with internet
+ skeletons look wrong in pose_check   person too small / far, bad light, or several people in view
+                                      (the largest person is used)
+ a clip is skipped (.failed file)     fewer than 20 frames with a person: check the clip, then --retry
+ "CUDA out of memory"                 python train.py --batch_size 8
+ selftest fails                       send the last 15 lines it printed
+ Laptop very hot / slow               keep vents free, charger in, Performance mode (Fn+Q)
+
+ IMPORTANT LIMITS
+ - The 10 clips of one subject + direction come from the same camera and probably the same
+   recording session. Train, validation and test clips therefore share conditions, so the
+   test result is probably higher than on a completely new session.
+ - With about 56 test clips, one clip changes the accuracy by about 1.8 points.
+ - The camera thresholds in config.py (CAM_*) are untested starting values. Always check
+   manifests\camera_review\ pictures.
+=====================================================================================

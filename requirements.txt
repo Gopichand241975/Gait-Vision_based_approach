@@ -1,8 +1,0 @@
-# ---- Libraries needed by the vision gait pipeline ----
-# PyTorch is NOT listed: Google Colab already has it. On your own GPU machine install the
-# build matching your CUDA version from https://pytorch.org/get-started/locally/ first.
-ultralytics>=8.1,<9        # YOLOv8-pose: video frame -> 17 COCO keypoints (pose_extract.py)
-opencv-python-headless>=4.8  # read videos, draw skeletons (pose_extract.py, check_pose.py)
-numpy>=1.24                # arrays: skeletons, features
-matplotlib>=3.7            # confusion matrix image (test.py)
-tqdm>=4.65                 # progress bars

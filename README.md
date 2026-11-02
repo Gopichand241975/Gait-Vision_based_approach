@@ -59,16 +59,7 @@ camera a score from 0 to 1.
 
 ## Split rules
 
-- Group = one subject + one direction. Within a group the clips are shuffled with `SPLIT_SEED` (42), then
-  6 train, 2 validation, 2 test.
-- `dataset_split.csv` columns: `clip_id`, `original_filename`, `relative_path`, `subject`, `direction`,
-  `selected_camera`, `trial`, `split`, `recording_id`, `group_clips`, `group_status`, `seed`.
-- Differences from the expected counts are reported, never forced: undecided groups are left out, groups
-  without 10 clips are split in the same 60/20/20 proportions and marked `nonstandard_count_<n>`, groups
-  with fewer than 3 clips are left out.
-- The check at the end of `make_split.py` confirms that every clip is in exactly one split, that the camera
-  matches `camera_selection.csv`, that the subject and direction match the file name, that each group has the
-  expected counts, and that no identical files sit in different splits.
+unts, and that no identical files sit in different splits.
 
 
 

@@ -21,26 +21,6 @@ dataset.py` | checks names, folders, counts, that every clip opens, duplicates |
 
 `python run_all.py` runs steps 1 to 8 in one go. It stops when a camera needs a manual decision.
 
-## Camera selection
-
-A side view shows the person crossing the image: the shoulders overlap and the hips travel far sideways.
-`select_camera.py` inspects a few clips of each camera (`CAM_SAMPLE_CLIPS` clips, `CAM_FRAMES_PER_CLIP`
-frames each), measures the shoulder width relative to the torso and the sideways hip travel, and gives each
-camera a score from 0 to 1.
-
-- One camera is selected **only** if its score reaches `CAM_MIN_SIDE_SCORE` and beats the other camera by
-  `CAM_MIN_MARGIN`. Otherwise the group is `needs_review` and no camera is selected.
-- Statuses: `auto_selected`, `needs_review`, `manual_confirmed` (set by you, never overwritten
-  unless you use `--overwrite`).
-- The thresholds in `config.py` are starting values that were not calibrated on your videos. Look at
-  `manifests/camera_review/<subject>_<direction>.jpg` (Cam-P left, Cam-S right) before trusting them.
-- `make_split.py` uses only `auto_selected` and `manual_confirmed` groups, and always uses all clips of
-  the selected camera. The other camera's clips are ignored, never deleted or changed.
-
-## Split rules
-
-unts, and that no identical files sit in different splits.
-
 
 
 

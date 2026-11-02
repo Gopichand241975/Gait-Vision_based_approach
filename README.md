@@ -84,13 +84,7 @@ not a newer `dataset_split.csv`. After a new split, train again.
 
 ## Metrics
 
-`test.py` reports accuracy, macro and weighted precision / recall / F1, per-subject precision / recall / F1,
-per-direction accuracy, Rank-5 accuracy (when there are more than 5 subjects) and a confusion matrix
-(`results/recognition/report.txt`, `accuracy.json`, `classification_report.csv`, `confusion_matrix.png`).
-Macro averages are the plain mean over the subjects that occur in the test clips.
-`train.py` writes `results/training/val_log.csv` and `training_curves.png`.
 
-## Settings you may change (`config.py`)
 
 
 

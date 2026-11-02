@@ -101,11 +101,7 @@ Macro averages are the plain mean over the subjects that occur in the test clips
 | `SEQ_LEN`, `SEQ_STRIDE` | window length and test-time step in frames | 60, 30 |
 | `POSE_MODEL`, `POSE_CONF` | pose model and detection confidence | yolov8m-pose.pt, 0.25 |
 
-The older split modes (`temporal`, `cross_direction`, `per_direction`, `videos`, `subjects`) are still in
-the code but have no validation set. `total_accuracy.py` belonged to the cross-direction experiments and
-is not part of the current pipeline.
 
-## Limitations
 
 - The 10 clips of a group come from the same camera and probably the same recording session, so train,
   validation and test clips share recording conditions. The test accuracy will probably be higher than on a

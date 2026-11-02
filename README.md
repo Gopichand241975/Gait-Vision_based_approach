@@ -70,20 +70,6 @@ camera a score from 0 to 1.
   matches `camera_selection.csv`, that the subject and direction match the file name, that each group has the
   expected counts, and that no identical files sit in different splits.
 
-## Training, validation and testing
-
-| Set | Used for |
-|---|---|
-| Train (6 clips per group) | updating the model; also the gallery that other clips are compared with |
-| Validation (2 per group) | choosing the best checkpoint during training (`best.pt`), nothing else |
-| Test (2 per group) | one final evaluation by `test.py`, after all decisions are made |
-
-`train.py` never reads the test clips. `test.py` uses `best.pt`, or `last.pt` if there is no validation set.
-Each checkpoint stores the split it was trained with, so `test.py` and `predict.py` always use that split,
-not a newer `dataset_split.csv`. After a new split, train again.
-
-## Metrics
-
 
 
 

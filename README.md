@@ -8,17 +8,7 @@ For each subject + direction one camera (the side view) is selected, which leave
 split 6 / 2 / 2 per group into **168 train / 56 validation / 56 test** clips.
 `verify_dataset.py` checks these numbers on your data; they are expectations, not assumptions.
 
-ture. It is trained to tell the 7 subjects apart (`train.py`, with flip / scale / noise
-   augmentation from `augment.py`).
-5. **Recognition** (`evaluate.py`, `test.py`): each clip becomes one feature (mean over its windows).
-   A validation or test clip gets the subject of the **nearest training clip** (Euclidean distance).
-
-## Pipeline order
-
-| # | Command | What it does | Writes |
-|---|---|---|---|
-| 0 | `python selftest.py --pose` | tests the whole code on fake data | nothing (temp folder) |
-| 1 | `python verify_dataset.py` | checks names, folders, counts, that every clip opens, duplicates | `manifests/dataset_inventory.csv`, `verification_report.txt` |
+dataset.py` | checks names, folders, counts, that every clip opens, duplicates | `manifests/dataset_inventory.csv`, `verification_report.txt` |
 | 2 | `python select_camera.py` | picks the side-view camera per subject + direction, flags unclear ones | `manifests/camera_selection.csv`, `camera_review/*.jpg` |
 | 2b | `python select_camera.py --set S03 PERP Cam-S --note "..."` | records your own decision | `camera_selection.csv` |
 | 3 | `python make_split.py` | 6 / 2 / 2 split with a fixed seed, then verifies it | `manifests/dataset_split.csv` |

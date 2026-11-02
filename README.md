@@ -8,17 +8,7 @@ For each subject + direction one camera (the side view) is selected, which leave
 split 6 / 2 / 2 per group into **168 train / 56 validation / 56 test** clips.
 `verify_dataset.py` checks these numbers on your data; they are expectations, not assumptions.
 
-The exact commands are in `GUIDE.txt`. This file explains what the project does.
-
-## How it works
-
-1. **Pose** (`pose_extract.py`): YOLOv8-pose gives 17 body joints per frame (x, y, confidence).
-2. **Normalise** (`preprocess.py`): each clip is smoothed, centred on the hips and scaled by its own
-   torso length. Nothing is fitted on the whole dataset, so nothing can leak from validation or test.
-3. **Windows** (`dataset.py`): the model sees 60-frame windows with 7 values per joint
-   (x, y, confidence, velocity, bone direction). Clips shorter than 60 frames are repeated to fill a window.
-4. **Model** (`model.py`): a graph convolution network (ResGCN style) turns a window into a 128-number
-   gait feature. It is trained to tell the 7 subjects apart (`train.py`, with flip / scale / noise
+ture. It is trained to tell the 7 subjects apart (`train.py`, with flip / scale / noise
    augmentation from `augment.py`).
 5. **Recognition** (`evaluate.py`, `test.py`): each clip becomes one feature (mean over its windows).
    A validation or test clip gets the subject of the **nearest training clip** (Euclidean distance).

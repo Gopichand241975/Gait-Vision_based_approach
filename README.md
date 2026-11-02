@@ -92,20 +92,7 @@ Macro averages are the plain mean over the subjects that occur in the test clips
 
 ## Settings you may change (`config.py`)
 
-| Setting | Meaning | Default |
-|---|---|---|
-| `SPLIT_SEED`, `SPLIT_CLIPS` | split seed and train / val / test clips per group | 42, (6, 2, 2) |
-| `CAM_*` | camera selection thresholds and how many clips / frames are inspected | see file |
-| `TOTAL_ITERS`, `BATCH_SIZE`, `LR` | training length, batch size, learning rate | 3000, 16, 1e-3 |
-| `SAVE_EVERY` | how often a checkpoint is saved and validation is run | 200 |
-| `SEQ_LEN`, `SEQ_STRIDE` | window length and test-time step in frames | 60, 30 |
-| `POSE_MODEL`, `POSE_CONF` | pose model and detection confidence | yolov8m-pose.pt, 0.25 |
 
 
 
-- The 10 clips of a group come from the same camera and probably the same recording session, so train,
-  validation and test clips share recording conditions. The test accuracy will probably be higher than on a
-  new session. The check for identical files cannot find overlapping frames between clips.
-- 56 test clips is small: one clip changes the accuracy by about 1.8 points.
-- Camera selection is a heuristic. Treat `auto_selected` as a suggestion until you have looked at the pictures.
-- The largest detected person in each frame is used, so other people in view can disturb the skeleton.
+

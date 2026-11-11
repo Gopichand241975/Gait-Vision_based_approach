@@ -1,0 +1,96 @@
+VISION: GAIT RECOGNITION WITH HRNET POSE  -  ALL 280 CLIPS FROM THE VIDEOS
+=========================================================================
+Pose model : HRNet-W32 (COCO 17 joints), the ONLY pose model. A Faster R-CNN gives HRNet the person box (HRNet is top-down)
+Recogniser : GaitResGCN (unchanged)
+Protocol   : train = CROSS-RX-LEFT + CROSS-RX-RIGHT (140 clips), val = PERP (70), test = LINE (70)
+Everything else (verify, camera table, split, preprocess, train, test, all_results, honest_eval) is as before.
+New        : hrnet_pose.py, pose_backend.py, make_images.py  (+ images/ folder, weights/ folder)
+
+NO skeletons or results are included: earlier ones came from a different pose model and must not be mixed with HRNet.
+
+STEP 0  Environment (the one you already have)
+----------------------------------------------
+   source ~/gait312/bin/activate
+   python -c "import torch, torchvision; print(torch.__version__, torchvision.__version__, torch.cuda.is_available())"
+   (must print True; torchvision is REQUIRED now: it provides the person detector)
+   pip install -r requirements.txt
+   cd "<folder where you unzipped Vision.zip>/Vision"
+
+STEP 1  Videos at ./dataset   (560 .mp4 files, both cameras)
+----------------------------------------------
+   find ~ -name "S01_PERP_Cam-S_T01.mp4" 2>/dev/null
+   ln -s /path/to/the/dataset/folder "$PWD/dataset"        # the folder that contains S01 ... S07
+   find dataset/ -name "*.mp4" | wc -l                      # must print 560
+
+STEP 2  Check the dataset
+----------------------------------------------
+   python verify_dataset.py                                  # "Clips with issues: 0"
+
+STEP 3  Camera decisions  (manifests/camera_selection.csv is included; all 28 groups are decided)
+----------------------------------------------
+   Do NOT run plain "python select_camera.py". The decisions were made earlier (13 automatic, 15 confirmed by you
+   looking at the pictures in manifests/camera_review/). To change one:
+      python select_camera.py --set S01 CROSS-RX-LEFT Cam-P --note "why"
+
+STEP 4  Split by walking direction
+----------------------------------------------
+   python make_split.py --direction_split
+   Expected: "Clips in the split: 280 of 280 expected   train 140   val 70   test 70"  and  "Verification passed".
+
+STEP 5  HRNet self-test  (1-2 minutes, run it BEFORE the long extraction)
+----------------------------------------------
+   python pose_backend.py --selftest
+   It downloads the HRNet weights (about 110 MB, into weights/) and the person detector (about 160 MB), then checks:
+     [1/5] geometry OK   [2/5] weights loaded   [3/5] parameters about 28.5 M   [4/5] forward pass OK
+     [5/5] one real frame: joints found + speed  ->  results/skeleton/hrnet_selftest.jpg
+   Open results/skeleton/hrnet_selftest.jpg: the joints must sit on the body.
+   The last line estimates the extraction time for all 280 clips on YOUR computer.
+   If something fails: send me the last 15 lines. There is no fallback model: HRNet runs or the program stops.
+   No internet: see weights/README.txt.
+
+STEP 6  Pose extraction with HRNet  (the long step; can be stopped with Ctrl+C and started again)
+----------------------------------------------
+   python pose_extract.py --all
+   Output: skeletons_raw/  and  results/skeleton/skeleton_summary.csv
+
+STEP 7  Check the poses, normalise, make the pictures
+----------------------------------------------
+   python check_pose.py --max_videos 28 --frames 3          # results/skeleton/pose_check/  (skeleton on video frames)
+   python preprocess.py                                      # processed/
+   python make_images.py                                     # images/   <- the separate pictures folder (see below)
+   python draw_skeletons.py                                  # results/skeleton/skeleton_grid.png, gait_strip_*.png
+   python baseline_check.py > baseline_results.txt
+
+STEP 8  Train, test, tables, honest 4-direction result
+----------------------------------------------
+   python train.py
+   python test.py
+   python all_results.py
+   python honest_eval.py --iters 1000
+
+THE images/ FOLDER  (python make_images.py;  options: --trials 1,2,3  --frames 8  --step 5  --subjects S01,S02)
+----------------------------------------------
+   images/<subject>/<direction>/frames/            raw video frames of the walking person
+   images/<subject>/<direction>/pose_extraction/   the same frames with the HRNet skeleton drawn on
+   images/<subject>/<direction>/skeleton/          the skeleton alone (blue = left, red = right)
+   images/<subject>/<direction>/montage_<clip>.jpg 3 rows (frame / pose extraction / skeleton), one walk
+   images/<subject>/<subject>_directions.jpg       the same rows for every walking direction side by side
+   images/pose_extraction_overview.jpg             all subjects x all directions
+   images/images_index.csv, README.txt
+
+WHERE EVERYTHING IS
+----------------------------------------------
+   manifests/ weights/ skeletons_raw/ processed/ checkpoints/ images/
+   results/skeleton/ (summary, pose_check, hrnet_selftest.jpg, skeleton_grid.png)
+   results/training/  results/recognition/  results/all/  results/honest/
+
+HONEST NOTES
+----------------------------------------------
+   - HRNet was not tested on your videos by the person who wrote this code (no GPU / PyTorch / videos there). Step 5 is
+     the check. Only the geometry (crop / heatmap decoding), the tracking logic and the pictures were tested.
+   - The person box is followed from the previous skeleton and the detector re-runs every 8 frames
+     (config.HRNET_REDETECT_EVERY). Set it to 1 for maximum accuracy (slower).
+   - HRNet confidence values are heatmap peaks (0 to about 1).
+   - The camera decisions in manifests/camera_selection.csv were made earlier, from review pictures made with another
+     pose model. Accuracy numbers from earlier runs are NOT comparable with this HRNet run.
+   - 15 camera groups were decided by looking at pictures; PERP is Cam-S, the other directions Cam-P; only 7 subjects.

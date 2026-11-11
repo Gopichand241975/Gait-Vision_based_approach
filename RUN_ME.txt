@@ -1,0 +1,17 @@
+START HERE
+==========
+Read RUN_FULL.txt. The commands, in short (inside the Vision folder, with your gait312 environment active):
+
+   ln -s /path/to/dataset "$PWD/dataset"            # the videos
+   python verify_dataset.py
+   python make_split.py --direction_split           # must say 280 of 280
+   python pose_backend.py --selftest                # HRNet check, 1-2 minutes
+   python pose_extract.py --all                     # long step
+   python check_pose.py --max_videos 28 --frames 3
+   python preprocess.py
+   python make_images.py                            # images/ folder
+   python draw_skeletons.py
+   python train.py
+   python test.py
+   python all_results.py
+   python honest_eval.py --iters 1000

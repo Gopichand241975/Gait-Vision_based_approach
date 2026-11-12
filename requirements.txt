@@ -1,0 +1,15 @@
+# ---- Libraries needed by the vision gait pipeline (Python 3.10 - 3.12) ----
+# Install PyTorch + torchvision FIRST (GPU build must match your CUDA driver), then:  pip install -r requirements.txt
+#
+# torch AND torchvision are NOT listed here. torchvision is REQUIRED: it provides the person detector
+# (Faster R-CNN) that feeds HRNet. Example for a CUDA 12.4 driver (Python 3.12):
+#     pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
+# Check:  python -c "import torch, torchvision; print(torch.cuda.is_available())"      (must print True)
+
+opencv-python-headless>=4.8  # read videos, draw skeletons and pictures (pose_extract.py, make_images.py, check_pose.py ...)
+numpy>=1.24                  # arrays: skeletons, features, metrics (all scripts)
+matplotlib>=3.7              # graphs: training curves, confusion matrix, skeleton grid
+tqdm>=4.65                   # progress bars (pose_extract.py)
+
+# Pose model = HRNet-W32. No extra pip package: the network is written in hrnet_pose.py and its COCO weights
+# (about 110 MB) are downloaded automatically into weights/ on first use.

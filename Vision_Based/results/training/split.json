@@ -1,0 +1,2475 @@
+{
+  "mode": "direction_holdout",
+  "train": [
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T11",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T11",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    }
+  ],
+  "val": [
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T01",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T02",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T03",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T04",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T05",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T06",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T07",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T08",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T09",
+      "direction": "PERP"
+    },
+    {
+      "person": "S01",
+      "video": "S01_PERP_Cam-S_T10",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T01",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T03",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T04",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T05",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T06",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T07",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T08",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T09",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T11",
+      "direction": "PERP"
+    },
+    {
+      "person": "S02",
+      "video": "S02_PERP_Cam-S_T12",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T01",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T02",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T03",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T04",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T05",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T06",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T07",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T08",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T09",
+      "direction": "PERP"
+    },
+    {
+      "person": "S03",
+      "video": "S03_PERP_Cam-S_T10",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T01",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T02",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T03",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T04",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T05",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T06",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T07",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T08",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T09",
+      "direction": "PERP"
+    },
+    {
+      "person": "S04",
+      "video": "S04_PERP_Cam-S_T10",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T01",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T02",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T03",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T04",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T05",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T06",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T07",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T08",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T09",
+      "direction": "PERP"
+    },
+    {
+      "person": "S05",
+      "video": "S05_PERP_Cam-S_T10",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T01",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T02",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T03",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T04",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T05",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T06",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T07",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T08",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T09",
+      "direction": "PERP"
+    },
+    {
+      "person": "S06",
+      "video": "S06_PERP_Cam-S_T10",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T01",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T02",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T03",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T04",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T05",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T06",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T07",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T08",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T09",
+      "direction": "PERP"
+    },
+    {
+      "person": "S07",
+      "video": "S07_PERP_Cam-S_T11",
+      "direction": "PERP"
+    }
+  ],
+  "test": [
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T11",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T10",
+      "direction": "LINE"
+    }
+  ],
+  "gallery": [
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-LEFT_Cam-P_T11",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T01",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T02",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T03",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T04",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T05",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T06",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T07",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T08",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T09",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-LEFT_Cam-P_T10",
+      "direction": "CROSS-RX-LEFT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S01",
+      "video": "S01_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S02",
+      "video": "S02_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S03",
+      "video": "S03_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S04",
+      "video": "S04_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S05",
+      "video": "S05_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S06",
+      "video": "S06_CROSS-RX-RIGHT_Cam-P_T11",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T01",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T02",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T03",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T04",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T05",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T06",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T07",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T08",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T09",
+      "direction": "CROSS-RX-RIGHT"
+    },
+    {
+      "person": "S07",
+      "video": "S07_CROSS-RX-RIGHT_Cam-P_T10",
+      "direction": "CROSS-RX-RIGHT"
+    }
+  ],
+  "probe": [
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S01",
+      "video": "S01_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S02",
+      "video": "S02_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S03",
+      "video": "S03_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S04",
+      "video": "S04_LINE_Cam-P_T11",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S05",
+      "video": "S05_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S06",
+      "video": "S06_LINE_Cam-P_T10",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T01",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T02",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T03",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T04",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T05",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T06",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T07",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T08",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T09",
+      "direction": "LINE"
+    },
+    {
+      "person": "S07",
+      "video": "S07_LINE_Cam-P_T10",
+      "direction": "LINE"
+    }
+  ],
+  "train_persons": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07"
+  ],
+  "warnings": [
+    "direction_holdout: train ['CROSS-RX-LEFT', 'CROSS-RX-RIGHT'], validation 'PERP', test 'LINE'"
+  ]
+}

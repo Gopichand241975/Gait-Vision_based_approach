@@ -1,0 +1,25 @@
+Gait recognition report (17-joint skeletons, nearest training clip, Euclidean distance)
+Split mode: direction_holdout   checkpoint: /home/arun32/Documents/MAJOR PROJECT/Vision_Final/Vision/checkpoints/best.pt (iteration 1500)
+Training (gallery) clips: 140   Test clips: 70   Subjects: 7
+
+Accuracy:            54.29%   (38/70 test clips correct)
+Macro precision:     42.06%
+Macro recall:        54.29%
+Macro F1-score:      46.26%
+Weighted F1-score:   46.26%
+Rank-5 accuracy:    95.71%
+Short-window accuracy: 45.45%   (1199 windows of 60 frames, each matched on its own; harder than the whole-clip score above)
+
+Per subject (precision / recall / F1 / test clips):
+  S01: 100.0% / 100.0% / 100.0% / 10
+  S02: 100.0% / 100.0% / 100.0% / 10
+  S03: 0.0% / 0.0% / 0.0% / 10
+  S04: 44.4% / 80.0% / 57.1% / 10
+  S05: 50.0% / 100.0% / 66.7% / 10
+  S06: 0.0% / 0.0% / 0.0% / 10
+  S07: 0.0% / 0.0% / 0.0% / 10
+
+Per walking direction (accuracy):
+  LINE: 54.3%
+
+Only 70 test clips: one clip changes the accuracy by 1.4 points. Treat small differences with care.

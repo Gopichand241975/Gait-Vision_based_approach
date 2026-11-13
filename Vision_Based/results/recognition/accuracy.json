@@ -1,0 +1,75 @@
+{
+  "split_mode": "direction_holdout",
+  "checkpoint": "/home/arun32/Documents/MAJOR PROJECT/Vision_Final/Vision/checkpoints/best.pt",
+  "checkpoint_iteration": 1500,
+  "gallery_videos": 140,
+  "probe_videos": 70,
+  "gallery_people": 7,
+  "accuracy_pct": 54.29,
+  "rank1_accuracy_pct": 54.29,
+  "rank5_accuracy_pct": 95.71,
+  "macro_precision_pct": 42.06,
+  "macro_recall_pct": 54.29,
+  "macro_f1_pct": 46.26,
+  "weighted_precision_pct": 42.06,
+  "weighted_recall_pct": 54.29,
+  "weighted_f1_pct": 46.26,
+  "window_accuracy_pct": 45.45,
+  "test_windows": 1199,
+  "per_person_rank1": {
+    "S01": 1.0,
+    "S02": 1.0,
+    "S03": 0.0,
+    "S04": 0.8,
+    "S05": 1.0,
+    "S06": 0.0,
+    "S07": 0.0
+  },
+  "per_direction_rank1": {
+    "LINE": 0.5429
+  },
+  "per_class": {
+    "S01": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10
+    },
+    "S02": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10
+    },
+    "S03": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 10
+    },
+    "S04": {
+      "precision": 0.4444,
+      "recall": 0.8,
+      "f1": 0.5714,
+      "support": 10
+    },
+    "S05": {
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6667,
+      "support": 10
+    },
+    "S06": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 10
+    },
+    "S07": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 10
+    }
+  }
+}

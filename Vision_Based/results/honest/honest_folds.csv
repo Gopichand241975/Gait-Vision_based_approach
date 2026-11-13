@@ -1,0 +1,5 @@
+held_out_direction,window_accuracy,clip_accuracy,test_windows,test_clips
+CROSS-RX-LEFT,0.5518,0.8571,1167,70
+CROSS-RX-RIGHT,0.3565,0.3143,1178,70
+LINE,0.4037,0.3714,1199,70
+PERP,0.6261,0.7857,1150,70

@@ -1,0 +1,13 @@
+Honest evaluation: leave-one-direction-out
+iterations per fold: 1000 (fixed, no selection on test)
+chance level: 14.3%
+
+  held out CROSS-RX-LEFT   window acc  55.2%   clip acc  85.7%
+  held out CROSS-RX-RIGHT  window acc  35.6%   clip acc  31.4%
+  held out LINE            window acc  40.4%   clip acc  37.1%
+  held out PERP            window acc  62.6%   clip acc  78.6%
+
+MEAN window accuracy 48.5%   MEAN clip accuracy 58.2%
+
+Report the worst fold as well as the mean. If a fold is near chance, the model has not learned
+identity that transfers to a new direction / camera.

@@ -1,0 +1,4 @@
+split,directions,clips,windows,clip_accuracy,clip_macro_f1,window_accuracy
+train,CROSS-RX-LEFT+CROSS-RX-RIGHT,140,2345,1.0,1.0,0.4729
+val,PERP,70,1150,0.9429,0.9423,0.4287
+test,LINE,70,1199,0.5429,0.4626,0.2535

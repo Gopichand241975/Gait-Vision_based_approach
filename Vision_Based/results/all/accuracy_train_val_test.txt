@@ -1,0 +1,10 @@
+Checkpoint: /home/arun32/Documents/MAJOR PROJECT/Vision_Final/Vision/checkpoints/best.pt (iteration 1500)   split mode: direction_holdout
+
+split  directions                   clips  clip acc  macro-F1  window acc
+train  CROSS-RX-LEFT+CROSS-RX-RIGHT   140    100.0%    100.0%       47.3%
+val    PERP                            70     94.3%     94.2%       42.9%
+test   LINE                            70     54.3%     46.3%       25.4%
+
+train clip accuracy leaves the clip itself out; train directions are SEEN in training,
+so a high train score is expected. val / test directions are unseen: those are the honest scores.
+chance level with 7 subjects: 14.3%

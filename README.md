@@ -115,16 +115,6 @@ Let:
 - \(C_j^V\) = Vision confidence for joint \(j\).
 - \(C_j^W\) = WiFi reliability for joint \(j\).
 
-The proposed confidence-based fusion can be represented as:
-
-\[
-F_j =
-\begin{cases}
-V_j, & C_j^V \geq T_V \\
-W_j, & C_j^V < T_V \text{ and } C_j^W \geq T_W \\
-\alpha V_j+(1-\alpha)W_j, & \text{Both reliable}
-\end{cases}
-\]
 
 Where:
 
